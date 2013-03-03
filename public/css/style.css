@@ -1,0 +1,392 @@
+body.home-page {
+	  margin:0 0 0 0;
+    background-attachment: fixed;
+    background-clip: border-box;
+    background-color: transparent;
+    background-image: url("/img/hc-theme/index-bg.png");
+    background-origin: padding-box;
+    background-repeat: no-repeat;
+    background-size: 100% 110%;
+}
+body.gender-page {
+	  margin:0 0 0 0;
+    background-attachment: fixed;
+    background-clip: border-box;
+    background-color: transparent;
+    background-image: url("/img/hc-theme/gender-bg.png");
+    background-origin: padding-box;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+body.chat-page {
+	  margin:0 0 0 0;
+    background-attachment: fixed;
+    background-clip: border-box;
+    background-color: transparent;
+    background-image: url("/img/hc-theme/chat-bg.png");
+    background-origin: padding-box;
+    background-repeat: no-repeat;
+    background-size: 100% 110%;
+}
+.header-wrapper {
+  background: url("/img/hc-theme/header-line.png") repeat-x scroll 0 -30px transparent;
+  background-size: contain;
+  
+  height: 150px;
+  width: 100%;
+}
+
+ .header-wrapper .header { 
+    background-attachment: inherit;
+    background-clip: border-box;
+    background-color: transparent;
+    background-image: url("/img/hc-theme/logo.png");
+    background-origin: padding-box;
+    background-position: 55% -12px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 150px;
+
+}
+
+ .header-wrapper .user-header { 
+     background-attachment: inherit;
+    background-clip: border-box;
+    background-color: transparent;
+    background-image: url("/img/hc-theme/bannerline.png");
+    background-origin: padding-box;
+    background-position: 76% -6px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 0 solid white;
+    float: right;
+    height: 45px;
+    margin: -9.75% 0;
+    width: 380px;
+ }
+
+.chatwindow{
+    position:relative;
+    height:332px; /* if you wish to use all of your space, use
+    position:absolute; top:0;left:0;right:0;bottom:0;
+    or drop the chatdwindow div */
+}
+.messagewindow{
+   bottom: 1px;
+    overflow: auto;
+    top: 98px;
+}
+.messagewindow{   
+    border: 0px solid white;
+    left: 97px;
+    position: absolute;
+    right: 66px;
+}
+.messagewindow img.leftp{
+	background-color: transparent;
+	 height: 59px;
+    padding: 26px 0 0 7px;
+    position: absolute;
+    text-align: left;
+    width: 65px;
+}
+
+.messagewindow img.rightp{
+	 height: 59px;
+    padding: 26px 0 0 472px;
+    position: absolute;
+    text-align: left;
+    width: 65px;
+}
+
+.me-chat{
+	  background-color: transparent;
+    background-image: url("/img/hc-theme/cloud-blue.png");
+    background-position: 88px 4px;
+    background-repeat: no-repeat;
+    height: 37px;
+    padding: 22px 0 0 120px;
+    position: relative;
+    text-align: left;
+    width: 378px;
+}
+.you-chat{
+		background-color: transparent;
+    background-image: url("/img/hc-theme/cloud-pink.png");
+    background-position: 147px 4px;
+    background-repeat: no-repeat;
+    height: 37px;
+    padding: 22px 0 0 169px;
+    position: relative;
+    text-align: left;
+    width: 378px;
+	
+}
+ .header-wrapper .user-header .signout{
+		background: url("/img/hc-theme/out.png") no-repeat scroll 41% -1px transparent;
+    border: 0px solid white;
+    float: right;
+    height: 27px;
+    margin: -48px 55px 3px 7px;
+    width: 24px;
+ }
+ .chat-container .current-photo {
+ 		background-attachment: scroll;
+    background-clip: border-box;
+    background-color: transparent;
+    background-image: url("/img/hc-theme/photo-frame-big.png");
+    background-origin: padding-box;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 194px;
+    margin: -39px 0 0 44%;
+    width: 198px;
+    position:relative;
+ }
+ 
+ .chat-container .next-photo {
+ 		background-attachment: scroll;
+    background-clip: border-box;
+    background-color: transparent;
+    background-image: url("/img/hc-theme/photo-frame-small.png");
+    background-origin: padding-box;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: contain;
+    float: right;
+    height: 168px;
+    margin: -102px 0 0 38%;
+    width: 155px;
+ }
+ 
+  .chat-container .previous-photo {
+ 		background-attachment: scroll;
+    background-clip: border-box;
+    background-color: transparent;
+    background-image: url("/img/hc-theme/photo-frame-small.png");
+    background-origin: padding-box;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: contain;
+    float: left;
+    height: 168px;
+    margin: -95px 34px 16px 0.5%;
+    width: 166px;
+    
+ }
+ 
+ .chat-container .chat-view {
+ 		 background-attachment: inherit;
+    background-clip: padding-box;
+    background-color: transparent;
+    background-image: url("/img/hc-theme/view-chat-box.png");
+    background-origin: content-box;
+    background-position: 88px 2px;
+    background-repeat: no-repeat;
+    background-size: 80% 100%;
+    height: 340px;
+    margin: -84px 0 15px 22%;
+    width: 717px;
+ }
+ 
+  .chat-container .chat-text {
+    background-attachment: inherit;
+    background-clip: padding-box;
+    background-color: transparent;
+    background-image: url("/img/hc-theme/chat-text.png");
+    background-origin: content-box;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 105px;
+    margin: -17px -1px -12px 29.25%;
+    width: 565px;
+ }
+ 
+   .chat-container .chat-text #message {
+   			background-color: transparent;
+		    border: 0px solid #000000;
+		    color: #3A2D27;
+		    font-family: "Georgia";
+		    font-size: 20px;
+		    margin: 29px 0 0 6%;
+		    width: 375px;
+   }
+   
+   .chat-container .chat-text #reply {
+   			background-color: transparent;
+		    background-image: url("/img/hc-theme/button-reply.png");
+		    background-size: 100% 101%;
+		    border: 0 solid #000000;
+		    color: #3A2D27;
+		    font-family: "Georgia";
+		    font-size: 20px;
+		    height: 53px;
+		    margin: 24px 0 0 4%;
+		    width: 98px;
+   }
+ 
+ .header-wrapper .user-header h2 {
+	padding-left:20px;
+	font-size: 20px;
+	width:70px
+	border: 0px solid #000000;
+	color: white;
+	font-family: "Georgia";
+	background-color: transparent;
+}
+
+.homepage-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.homepage-container .login-container {
+	background: url("/img/hc-theme/signin-box.png") no-repeat scroll 90% -157px transparent;
+	background-size: -moz-calc();
+	height: 400px;
+}
+
+
+.gender-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.gender-container .choose-gender-box {
+	background: url("/img/hc-theme/gender-box.png") no-repeat scroll 51.5% 35px transparent;
+	background-size: -moz-calc();
+	height: 400px;
+	
+}
+
+.gender-container .choose-gender-box input {
+	color : white;
+	padding: 0 0 0 43%;
+}
+
+.gender-container .choose-gender-box .username-wrapper {
+	padding: 36px 47px 0 65%;
+	
+}
+
+form {
+	background-color: transparent;
+	height:100%;
+	
+}
+.gender-container .choose-gender-box #username {
+	font-size: 26.47px;
+	width:70px;
+	border: 0px solid #000000;
+	color: #3a2d27;
+	font-family: "Georgia";
+	background-color: transparent;
+}
+
+.gender-container .choose-gender-box .male{
+		border: 0px solid #000000;
+		background-attachment: inherit;
+    background-clip: inherit;
+    background-color: transparent;
+    background-image: url("/img/hc-theme/male-gender.png");
+    background-origin: padding-box;
+    background-position: -128px 0;
+    background-repeat: no-repeat;
+    height: 32%;
+    width: 9%;
+   margin: 122px 0 0 42%;
+}
+
+.gender-container .choose-gender-box .male .s{
+    background-position: -6px 0;
+}
+
+.gender-container .choose-gender-box .female{
+		border: 0px solid #000000;
+		background-attachment: inherit;
+    background-clip: inherit;
+    background-color: transparent;
+    background-image: url("/img/hc-theme/female-gender.png");
+    background-origin: padding-box;
+    background-position: -124px 0;
+    background-repeat: no-repeat;
+    height: 32%;
+    margin: 0 0 0 1%;
+    width: 122px;
+}
+    
+}
+
+.gender-container .choose-gender-box .female .s{
+     background-position: -2px 0;
+
+}
+
+
+.gender-container .choose-gender-box .username-box {
+	/*
+	  background: url("/img/hc-theme/username-box.png") repeat fixed 145px 4px transparent;
+    border: 1px solid white;
+    float: none;
+    height: 84px;
+    margin: 0 4px 7px 498px;
+    width: 313px;
+    */
+     background-attachment: fixed;
+    background-clip: inherit;
+    background-color: transparent;
+    background-image: url("/img/hc-theme/username-box.png");
+    background-origin: padding-box;
+    background-position: 55% -1%;
+    background-repeat: no-repeat;
+    border: 0 solid #000000;
+    height: 20%;
+    margin: 0;
+    width: 62%;
+}
+
+.gender-container .choose-gender-box #submit {
+		 background: none repeat scroll 0 0 transparent;
+    border: 0px solid #000000;
+    float: right;
+    height: 35px;
+    margin: -29px 2px 3px 14px;
+    width: 61px;
+}
+
+.homepage-container .login-container .sb-twitter {
+	display:block;
+	background: url("/img/hc-theme/tw-button.png") no-repeat scroll  85% 139px transparent;
+	background-size: -moz-calc();
+	height:200px;
+}
+
+.homepage-container .login-container .sb-facebook {
+	display:block;
+	background: url("/img/hc-theme/fb-button.png") no-repeat scroll  85% 13px transparent;
+	background-size: -moz-calc();
+	height:300px;
+}
+
+footer {
+    background: url("/img/hc-theme/footer-line.png") repeat-x scroll 0 0 transparent;
+    bottom: 0;
+    padding-top:30px;
+    height: 50px;
+    background-size: contain;
+    position: fixed;
+    width: 100%;
+    text-align:center;
+   
+}
+
+ footer a, footer p{
+	 font-size: 80%;
+	 color: #cfb3a0;
+	 line-height: 0;
+	 text-decoration: none;
+}

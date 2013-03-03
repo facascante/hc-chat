@@ -10,6 +10,7 @@ var express = require('express')
   , passport = require('passport')
   , path = require('path');
 
+require('./strategy');
 var app = express();
 
 app.configure(function(){
@@ -21,6 +22,11 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.cookieParser('hatchcatch'));
+  app.use(express.session({
+        key: "hatchcatch"
+	  }));
+  app.use(passport.initialize());
+  app.use(passport.session());
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
 });
@@ -39,7 +45,7 @@ app.get('/authfb/callback',
 	      failureRedirect: '/'
 	    })
 );
-app.get('/:version/authtw/callback', 
+app.get('/authtw/callback', 
 	    passport.authenticate('twitter', {
 	      successRedirect: '/option',
 	      failureRedirect: '/'

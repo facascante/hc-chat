@@ -3,12 +3,12 @@
     "twitter": {
       "consumerkey" : "LEMDKdQ4NXGOddvSjJOtBQ",
       "consumersecret" : "44dQ4l0dlLyXAYjf09m4pLTUPt1J9sysFeXmhKJDA",
-      "callback" : "http://hc-chat.chito20s.c9.io/auth/twitter/callback"
+      "callback" : "http://hc-chat.chito20s.c9.io/authtw/callback"
     },
     "facebook": {
       "clientid" : "447241648681212",
       "clientsecret" : "0425c311c7896527fa7cab47731ee8c1",
-      "callback" : "http://hc-chat.chito20s.c9.io//auth/facebook/callback"
+      "callback" : "http://hc-chat.chito20s.c9.io/authfb/callback"
     }
   }
 }

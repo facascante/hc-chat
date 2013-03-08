@@ -5,13 +5,21 @@
 
 var express = require('express')
   , routes = require('./routes')
-  , user = require('./routes/user')
   , http = require('http')
   , passport = require('passport')
-  , path = require('path');
+  , path = require('path')
+  , redis require("redis")
+  , RedisStore = require("connect-redis")(express);
+
+
+var rtg   = require('url').parse("redis://redistogo:83fb6eafaf19fbd49eb0b33a08b66fdb@dory.redistogo.com:10325/");
+var client = exports.client  = redis.createClient(rtg.port, rtg.hostname);
+client.auth(rtg.auth.split(':')[1]); 
+var sessionStore = exports.sessionStore = new RedisStore({client: client});
 
 require('./strategy');
-var app = express();
+
+var app exports.app = express();
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -23,7 +31,8 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(express.cookieParser('hatchcatch'));
   app.use(express.session({
-        key: "hatchcatch"
+        key: "hatchcatch",
+        store: sessionStore
 	  }));
   app.use(passport.initialize());
   app.use(passport.session());
@@ -57,6 +66,10 @@ app.get('/logout', function(req, res){
 	  res.redirect('/');
 });
 
-http.createServer(app).listen(app.get('port'), function(){
+exports.server = http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
+
+require('./sockets');
+
+

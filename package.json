@@ -10,6 +10,11 @@
     "jade": "*",
     "passport" : "*",
     "passport-twitter": "*",
-    "passport-facebook": "*"
+    "passport-facebook": "*",
+    "socket.io": "*",
+    "redis": "*",
+    "connect-redis": "*",
+    "connect": "*",
+    "cookie": "*"
   }
 }

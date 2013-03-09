@@ -1,5 +1,15 @@
 module.exports = {
     
+    roomList : function(client,fn){
+        client.smembers('hc:rooms',function(err, rooms){
+            if(err){
+                fn(err);
+            }
+            else{
+                fn(null,rooms);
+            }
+        });  
+    },
     getRoom : function(client,user,fn){
         client.smembers('hc:rooms',function(err, rooms){
             if(err){

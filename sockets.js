@@ -44,10 +44,19 @@ io.sockets.on('connection', function (socket) {
     , codename = hs.codename
     , gender = hs.gender
   
-  model.getRoom(client,gender,function(err,room){
+  model.getRoom(client,hs,function(err,room){
       if(room){
-          socket.join(room); 
+          socket.join(room.no); 
           model.addVisitor(client,room,hs);
+          
+          model.roomList(client,function(err,rooms){
+              if(rooms){    
+                  rooms = JSON.stringify(rooms);
+                  rooms.forEach(function(room){
+                      io.sockets.in(room.no).emit('chatmate', rooms); 
+                  });
+              }
+          });
           socket.on('my msg', function(data) {
             var no_empty = data.msg.replace("\n","");
             if(no_empty.length > 0) {      
@@ -60,6 +69,7 @@ io.sockets.on('connection', function (socket) {
               });        
             }   
           });
+          
          
           
           socket.on('disconnect', function() {

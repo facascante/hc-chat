@@ -1,0 +1,23 @@
+extends layout
+
+block content
+	body.chat-page
+		.header-wrapper
+			.header
+			.user-header
+				h2 Hi 
+					=users.code_name
+					!
+				a.signout(href="/signout")
+		.chat-container
+			.current-photo
+			.next-photo
+			.previous-photo
+			.chat-view
+				.chatwindow
+					.messagewindow
+			.chat-text
+				input#message(type='text', name='message')
+				button#reply(type='button',name='reply')
+	script(src="/socket.io/socket.io.js")
+	script(defer, src="/js/chat.js") 

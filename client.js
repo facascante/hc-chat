@@ -11,11 +11,14 @@ module.exports = {
         });  
     },
     getRoom : function(client,user,fn){
+        console.log("Getting Rooms and Visitor");
+        console.log(user);
         client.smembers('hc:rooms',function(err, rooms){
             if(err){
                 fn(err);
             }
             else if(rooms.length > 0){
+                console.log(rooms);
                 var i=0;
                 rooms.forEach(function(room){
                     var roomInfo = JSON.stringify(room);
@@ -48,6 +51,9 @@ module.exports = {
         });
     },
     addVisitor : function(client,room,visitor){
+        console.log("Adding user");
+        console.log(room);
+        console.log(visitor);
         var isUserExist = false;
         room.visitor.forEach(function(user){
             if(user.username == visitor.username){
@@ -57,6 +63,18 @@ module.exports = {
         if(!isUserExist){
             client.srem('hc:rooms',room);
             room.visitor.push(visitor);    
+        }
+        client.sadd(room);
+    },
+    removeVisitor : function(client,room,visitor){
+        console.log("Removing user");
+        console.log(room);
+        console.log(visitor);
+        client.srem('hc:rooms',room);
+        for(var user in room.visitor){
+            if(room.visitor[user].username == visitor.username){
+                delete room.visitor[user];
+            }
         }
         client.sadd(room);
     }

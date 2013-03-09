@@ -13,13 +13,18 @@ var express = require('express')
 
 
 var rtg   = require('url').parse("redis://redistogo:83fb6eafaf19fbd49eb0b33a08b66fdb@dory.redistogo.com:10325/");
-var client = exports.client  = redis.createClient(rtg.port, rtg.hostname);
+console.log(rtg);
+var client = exports.client  = redis.createClient(rtg.port,rtg.hostname);
 client.auth(rtg.auth.split(':')[1]); 
+var pub = exports.pub  = redis.createClient(rtg.port,rtg.hostname);
+pub.auth(rtg.auth.split(':')[1]); 
+var sub = exports.sub  = redis.createClient(rtg.port,rtg.hostname);
+sub.auth(rtg.auth.split(':')[1]); 
 var sessionStore = exports.sessionStore = new RedisStore({client: client});
 
 require('./strategy');
 
-var app exports.app = express();
+var app = exports.app = express();
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -48,22 +53,12 @@ app.get('/', routes.index);
 app.get('/option',routes.option);
 app.get('/authfb', passport.authenticate('facebook'));
 app.get('/authtw', passport.authenticate('twitter'));
-app.get('/authfb/callback', 
-        passport.authenticate('facebook', {
-	      successRedirect: '/option',
-	      failureRedirect: '/'
-	    })
-);
-app.get('/authtw/callback', 
-	    passport.authenticate('twitter', {
-	      successRedirect: '/option',
-	      failureRedirect: '/'
-	    })
-);
+app.get('/authfb/callback', passport.authenticate('facebook', {successRedirect: '/option',failureRedirect: '/'}));
+app.get('/authtw/callback', passport.authenticate('twitter', {successRedirect: '/option',failureRedirect: '/'}));
 
 app.get('/logout', function(req, res){
-	  req.logout();
-	  res.redirect('/');
+    req.logout();
+	res.redirect('/');
 });
 
 exports.server = http.createServer(app).listen(app.get('port'), function(){

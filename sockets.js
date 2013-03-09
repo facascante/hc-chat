@@ -1,9 +1,12 @@
 var parent = module.parent.exports
   , server = parent.server
   , client = parent.client
+  , pub = parent.pub
+  , sub = parent.sub
   , model = require("./client")
   , sessionStore = parent.sessionStore
   , sio = require('socket.io')
+  , redis = require("redis")
   , cookieParser = require("connect").utils.parseSignedCookies
   , cookie = require("cookie");
   
@@ -32,7 +35,7 @@ io.set('authorization', function (hsData, accept) {
 });
 
 io.configure(function() {
-  io.set('store', new sio.RedisStore({client: client}));
+  io.set('store', new sio.RedisStore({redis: redis, redisPub: pub,redisSub: sub,redisClient: client}));
   io.enable('browser client minification');
   io.enable('browser client gzip');
 });
@@ -73,7 +76,7 @@ io.sockets.on('connection', function (socket) {
          
           
           socket.on('disconnect', function() {
-            
+            model.removeVisitor(client,room,hs);
           });
       }
       else{

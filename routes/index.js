@@ -9,3 +9,6 @@ exports.index = function(req, res){
 exports.option = function(req, res){
   res.render('option');
 };
+exports.chat = function(req,res){
+  res.render('chat');
+};

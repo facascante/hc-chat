@@ -8,7 +8,7 @@ var express = require('express')
   , http = require('http')
   , passport = require('passport')
   , path = require('path')
-  , redis require("redis")
+  , redis = require("redis")
   , RedisStore = require("connect-redis")(express);
 
 

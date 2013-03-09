@@ -1,6 +1,7 @@
 var parent = module.parent.exports
   , server = parent.server
   , client = parent.client
+  , model = require("./client")
   , sessionStore = parent.sessionStore
   , sio = require('socket.io')
   , cookieParser = require("connect").utils.parseSignedCookies
@@ -19,8 +20,7 @@ io.set('authorization', function (hsData, accept) {
       }
 
       hsData.hatchcatch = {
-        user: session.passport.user,
-        room: /\/(?:([^\/]+?))\/?$/g.exec(hsData.headers.referer)[1]
+        user: session.passport.user
       };
 
       return accept(null, true);
@@ -38,44 +38,40 @@ io.configure(function() {
 });
 
 io.sockets.on('connection', function (socket) {
-  var hs = socket.handshake
-    , username = hs.hatchcatch.user.username
-    , provider = hs.hatchcatch.user.provider
-    , codename = hs.hatchcatch.user.codename
-    , gender = hs.hatchcatch.user.gender
-    , room = hs.hatchcatch.room;
-
-  socket.join(room);
+  var hs = socket.handshake.hatchcatch.user
+    , username = hs.username
+    , provider = hs.provider
+    , codename = hs.codename
+    , gender = hs.gender
   
-  client.smembers('hc:rooms',function(err,result){
-      result.forEach(function(){
-          io.sockets.in(room).emit('chat list', {
-                    chatmate: result
+  model.getRoom(client,gender,function(err,room){
+      if(room){
+          socket.join(room); 
+          model.addVisitor(client,room,hs);
+          socket.on('my msg', function(data) {
+            var no_empty = data.msg.replace("\n","");
+            if(no_empty.length > 0) {      
+              io.sockets.in(room).emit('new msg', {
+                username: username,
+                gender: gender,
+                codename: codename,
+                provider: provider,
+                msg: data.msg
+              });        
+            }   
           });
-      });
-  });
-  
-  socket.on('my msg', function(data) {
-    var no_empty = data.msg.replace("\n","");
-    if(no_empty.length > 0) {      
-      io.sockets.in(room).emit('new msg', {
-        username: username,
-        gender: gender,
-        codename: codename,
-        provider: provider,
-        msg: data.msg
-      });        
-    }   
-  });
-  socket.on('user enter', function(data) {
-      client.smembers('hc:users:'+gender,function(err,result){
-          io.sockets.in(room).emit('chat list', {
-                    chatmate: result
+         
+          
+          socket.on('disconnect', function() {
+            
           });
-      });  
+      }
+      else{
+          console.log("ERROR: Unable to alocate room!");
+          console.log(err);
+      }
   });
   
-  socket.on('disconnect', function() {
-    
-  });
+  
+  
 });

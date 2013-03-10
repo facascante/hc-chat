@@ -2,6 +2,7 @@ module.exports = {
     
     roomList : function(client,fn){
         client.smembers('hc:rooms',function(err, rooms){
+            console.log("Getting Rooms: " + rooms.length);
             if(err){
                 fn(err);
             }
@@ -11,9 +12,9 @@ module.exports = {
         });  
     },
     getRoom : function(client,user,fn){
-        console.log("Getting Rooms and Visitor");
-        console.log(user);
+        
         client.smembers('hc:rooms',function(err, rooms){
+            console.log("Getting Rooms and Visitor: " + rooms.length );
             if(err){
                 fn(err);
             }
@@ -51,8 +52,6 @@ module.exports = {
     },
     addVisitor : function(client,room,visitor){
         console.log("Adding user");
-        console.log(room);
-        console.log(visitor);
         var isUserExist = false;
         room.visitor.forEach(function(user){
             if(user.username == visitor.username){
@@ -67,8 +66,6 @@ module.exports = {
     },
     removeVisitor : function(client,room,visitor){
         console.log("Removing user");
-        console.log(room);
-        console.log(visitor);
         client.srem('hc:rooms',JSON.stringify(room));
         for(var user in room.visitor){
             if(room.visitor[user].username == visitor.username){

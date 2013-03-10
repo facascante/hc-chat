@@ -46,11 +46,11 @@ io.sockets.on('connection', function (socket) {
     , provider = hs.provider
     , codename = hs.codename
     , gender = hs.gender
-  
-  model.getRoom(client,hs,function(err,room){
+  var user = {username: hs.username,provider: hs.provider, codename: hs.codename, gender: hs.gender, profileUrl: hs.profileUrl};
+  model.getRoom(client,user,function(err,room){
       if(room){
           socket.join(room.no); 
-          model.addVisitor(client,room,hs);
+          model.addVisitor(client,room,user);
           
           model.roomList(client,function(err,rooms){
               if(rooms){    
@@ -71,11 +71,9 @@ io.sockets.on('connection', function (socket) {
               });        
             }   
           });
-          
-         
-          
+            
           socket.on('disconnect', function() {
-            model.removeVisitor(client,room,hs);
+            model.removeVisitor(client,room,user);
           });
       }
       else{

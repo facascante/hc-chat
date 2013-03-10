@@ -48,11 +48,9 @@ io.sockets.on('connection', function (socket) {
     , gender = hs.gender
   var user = {username: hs.username,provider: hs.provider, codename: hs.codename, gender: hs.gender, profileUrl: hs.profileUrl};
   console.log(user);
-  model.getRoom(client,user,function(err,room){
+  model.accomodateVisitor(client,user,function(err,room){
       if(room){
-          socket.join(room.no); 
-          model.addVisitor(client,room,user);
-          
+          socket.join(room); 
           model.roomList(client,function(err,rooms){
               if(rooms){    
                   rooms.forEach(function(room){
@@ -74,7 +72,7 @@ io.sockets.on('connection', function (socket) {
           });
             
           socket.on('disconnect', function() {
-            model.removeVisitor(client,room,user);
+            //model.removeVisitor(client,room,user);
           });
       }
       else{

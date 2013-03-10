@@ -11,9 +11,51 @@ module.exports = {
             }
         });  
     },
-    getRoom : function(client,user,fn){
-        
-        
+    accomodateVisitor : function(client,user,fn){
+               
+        client.smembers('hc:rooms',function(err, rooms){
+            var room;
+            if(err){
+                fn(err);
+                console.log("Redis failed!, smembers hc:rooms "+err);
+            }
+            else if(!rooms || (rooms.length == 0)){
+                   room = 1;
+                   client.sadd('hc:rooms',room);
+                   client.sadd('hc:room:'+room+':visitor',JSON.stringify(user));
+                   console.log("room and visitor added successfully");
+                   fn(null,room);
+            }
+            else{
+                var ctr = 0, ctrin = 0;
+                while (ctr < rooms.length) {
+                    client.smembers('hc:room:'+rooms[ctr]+':visitor',function(err,visitors){
+                        if(err){
+                            console.log("Redis failed!, smembers" + 'hc:room:'+rooms[ctrin]+':visitor' +err);
+                            fn(err);         
+                        }
+                        else if(!visitors || (visitors.length == 0)){
+                            client.sadd('hc:room:'+rooms[ctrin]+':visitor',user);
+                            fn(null,rooms[ctrin]);              
+                        }
+                        else if(visitors.length == 1){
+                            visitor = JSON.parse(visitors[0]);
+                            if(visitor.gender != user.gender || visitor.username != user.username){
+                                client.sadd('hc:room:'+rooms[ctrin]+':visitor',user);
+                                fn(null,rooms[ctrin]);  
+                            }
+                        }
+                        else{
+                            
+                        }
+                        ctrin++;
+                    });
+                    ctr++;
+                }
+                
+            }
+            
+        });
         /*
         client.smembers('hc:rooms',function(err, rooms){
             console.log("Getting Rooms and Visitor: " + rooms.length );

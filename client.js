@@ -13,6 +13,8 @@ module.exports = {
     },
     getRoom : function(client,user,fn){
         
+        
+        /*
         client.smembers('hc:rooms',function(err, rooms){
             console.log("Getting Rooms and Visitor: " + rooms.length );
             if(err){
@@ -22,33 +24,34 @@ module.exports = {
                 var i=0;
                 rooms.forEach(function(room){
                     var roomInfo = JSON.parse(room);
-                    /*** is room empty ***/
+              
                     if(roomInfo.visitor.length === 0){
                         fn(null,roomInfo); return;
                     }
-                    /*** is user already exist ***/
+                 
                     roomInfo.visitor.forEach(function(visitor){
                         if(visitor.username == user.username){
                             fn(null,roomInfo); return;
                            
                         }
                     });
-                    /*** is room contain 1 visitor and gender is opposite ***/
+                 
                     if(roomInfo.visitor.length == 1 &&  (roomInfo.visitor[0].gender != user.gender)){
                         fn(null,roomInfo); return;
                     }
                     i++;
                 });
-                /*** no more vacant room ***/
+           
                 if(i == rooms.length){
-                    fn(null,{no:i++,visitor:[]});
+                    fn(null,{no:(rooms.length + 1),visitor:[]});
                 }
             }
-            /*** no room created yet ***/
+       
             else{
                 fn(null,{no:1,visitor:[]});
             }
         });
+        */
     },
     addVisitor : function(client,room,visitor){
         console.log("Adding user");

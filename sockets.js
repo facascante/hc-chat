@@ -47,6 +47,7 @@ io.sockets.on('connection', function (socket) {
     , codename = hs.codename
     , gender = hs.gender
   var user = {username: hs.username,provider: hs.provider, codename: hs.codename, gender: hs.gender, profileUrl: hs.profileUrl};
+  console.log(user);
   model.getRoom(client,user,function(err,room){
       if(room){
           socket.join(room.no); 

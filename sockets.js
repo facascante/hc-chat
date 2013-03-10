@@ -54,7 +54,6 @@ io.sockets.on('connection', function (socket) {
           
           model.roomList(client,function(err,rooms){
               if(rooms){    
-                  rooms = JSON.stringify(rooms);
                   rooms.forEach(function(room){
                       io.sockets.in(room.no).emit('chatmate', rooms); 
                   });

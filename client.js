@@ -6,7 +6,7 @@ module.exports = {
                 fn(err);
             }
             else{
-                fn(null,JSON.parse(rooms));
+                fn(null,rooms);
             }
         });  
     },
@@ -18,10 +18,9 @@ module.exports = {
                 fn(err);
             }
             else if(rooms.length > 0){
-                rooms = JSON.parse(rooms);
                 var i=0;
                 rooms.forEach(function(room){
-                    var roomInfo = room;
+                    var roomInfo = JSON.parse(room);
                     /*** is room empty ***/
                     if(roomInfo.visitor.length === 0){
                         fn(null,roomInfo); return;

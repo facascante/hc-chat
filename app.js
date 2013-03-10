@@ -51,6 +51,7 @@ app.configure('development', function(){
 
 app.get('/', routes.index);
 app.get('/option',routes.option);
+app.post('/chat',routes.chat);
 app.get('/authfb', passport.authenticate('facebook'));
 app.get('/authtw', passport.authenticate('twitter'));
 app.get('/authfb/callback', passport.authenticate('facebook', {successRedirect: '/option',failureRedirect: '/'}));

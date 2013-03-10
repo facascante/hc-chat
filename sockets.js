@@ -15,7 +15,7 @@ var io = sio.listen(server);
 io.set('authorization', function (hsData, accept) {
   if(hsData.headers.cookie) {
     var cookies = cookieParser(cookie.parse(hsData.headers.cookie), "hatchcatch")
-      , sid = cookies['balloons'];
+      , sid = cookies['hatchcatch'];
 
     sessionStore.load(sid, function(err, session) {
       if(err || !session) {

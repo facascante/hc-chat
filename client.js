@@ -6,7 +6,7 @@ module.exports = {
                 fn(err);
             }
             else{
-                fn(null,rooms);
+                fn(null,JSON.parse(rooms));
             }
         });  
     },
@@ -18,10 +18,10 @@ module.exports = {
                 fn(err);
             }
             else if(rooms.length > 0){
-                console.log(rooms);
+                rooms = JSON.parse(rooms);
                 var i=0;
                 rooms.forEach(function(room){
-                    var roomInfo = JSON.stringify(room);
+                    var roomInfo = room;
                     /*** is room empty ***/
                     if(roomInfo.visitor.length === 0){
                         fn(null,roomInfo); return;
@@ -61,21 +61,21 @@ module.exports = {
             }
         });
         if(!isUserExist){
-            client.srem('hc:rooms',room);
+            client.srem('hc:rooms',JSON.stringify(room));
             room.visitor.push(visitor);    
         }
-        client.sadd(room);
+        client.sadd('hc:rooms',JSON.stringify(room));
     },
     removeVisitor : function(client,room,visitor){
         console.log("Removing user");
         console.log(room);
         console.log(visitor);
-        client.srem('hc:rooms',room);
+        client.srem('hc:rooms',JSON.stringify(room));
         for(var user in room.visitor){
             if(room.visitor[user].username == visitor.username){
                 delete room.visitor[user];
             }
         }
-        client.sadd(room);
+        client.sadd('hc:rooms',JSON.stringify(room));
     }
 }

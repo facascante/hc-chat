@@ -68,4 +68,11 @@ exports.server = http.createServer(app).listen(app.get('port'), function(){
 
 require('./sockets');
 
+client.keys('hc:*', function(err, keys) {
+    keys.forEach(function(key){client.del(key)});
+    //console.log(keys);
+  //  if(keys.length) client.del(keys);
+    console.log('Deletion of all redis reference ', err || "Done!");
+});
+
 

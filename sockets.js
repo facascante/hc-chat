@@ -59,6 +59,8 @@ io.sockets.on('connection', function (socket) {
               }
           });
           socket.on('my msg', function(data) {
+              console.log("==================message arrive===================");
+            console.log(data);
             var no_empty = data.msg.replace("\n","");
             if(no_empty.length > 0) {      
               io.sockets.in(room).emit('new msg', {

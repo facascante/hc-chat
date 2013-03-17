@@ -8,7 +8,7 @@
     "facebook": {
       "clientid" : "447241648681212",
       "clientsecret" : "0425c311c7896527fa7cab47731ee8c1",
-      "callback" : "http://hc-chat.chito20s.c9.io/authfb/callback"
+      "callback" : "http://54.251.65.218:3000/authfb/callback"
     }
   }
 }

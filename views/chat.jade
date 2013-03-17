@@ -5,9 +5,13 @@ block content
 		.header-wrapper
 			.header
 			.user-header
-				h2 Hi 
-					=user.codename
-					!
+				h2 
+					table
+						tr
+							td Hi
+							td 
+								p#codename.pcn=user.codename
+							td 
 				a.signout(href="/signout")
 		.chat-container
 			.current-photo

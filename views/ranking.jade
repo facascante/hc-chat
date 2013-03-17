@@ -1,0 +1,160 @@
+extends layout
+
+block content
+	body.ranking-page
+		.header-wrapper
+			.header
+			.user-header
+				h2 Hi
+		.ranking-container
+			.ranking-selection-box
+				.ranking-selection-list
+					.ranking-left
+						#c1.chat_photo
+						h4#cmate_1 Jemoveldad 21 -
+						#r1.rate_widget
+							.chick_1.ratings_chick
+							.chick_2.ratings_chick
+							.chick_3.ratings_chick
+							.chick_4.ratings_chick
+							.chick_5.ratings_chick
+							.total_votes
+						#c2.chat_photo
+						h4#cmate_2 Jemo
+						#r2.rate_widget
+							.chick_1.ratings_chick
+							.chick_2.ratings_chick
+							.chick_3.ratings_chick
+							.chick_4.ratings_chick
+							.chick_5.ratings_chick
+							.total_votes
+						#c3.chat_photo
+						h4#cmate_3 Jemo
+						#r3.rate_widget
+							.chick_1.ratings_chick
+							.chick_2.ratings_chick
+							.chick_3.ratings_chick
+							.chick_4.ratings_chick
+							.chick_5.ratings_chick
+							.total_votes
+						#c4.chat_photo
+						h4#cmate_4 Jemo
+						#r4.rate_widget
+							.chick_1.ratings_chick
+							.chick_2.ratings_chick
+							.chick_3.ratings_chick
+							.chick_4.ratings_chick
+							.chick_5.ratings_chick
+							.total_votes
+						#c5.chat_photo
+						h4#cmate_5 Jemo
+						#r5.rate_widget
+							.chick_1.ratings_chick
+							.chick_2.ratings_chick
+							.chick_3.ratings_chick
+							.chick_4.ratings_chick
+							.chick_5.ratings_chick
+							.total_votes
+						#c6.chat_photo
+						h4#cmate_6 Jemo
+						#r6.rate_widget
+							.chick_1.ratings_chick
+							.chick_2.ratings_chick
+							.chick_3.ratings_chick
+							.chick_4.ratings_chick
+							.chick_5.ratings_chick
+							.total_votes
+						#c7.chat_photo
+						h4#cmate_7 Jemo
+						#r7.rate_widget
+							.chick_1.ratings_chick
+							.chick_2.ratings_chick
+							.chick_3.ratings_chick
+							.chick_4.ratings_chick
+							.chick_5.ratings_chick
+							.total_votes
+						#c8.chat_photo
+						h4#cmate_8 Jemo
+						#r8.rate_widget
+							.chick_1.ratings_chick
+							.chick_2.ratings_chick
+							.chick_3.ratings_chick
+							.chick_4.ratings_chick
+							.chick_5.ratings_chick
+							.total_votes
+					.ranking-right
+						#c9.chat_photo
+						h4#cmate_9 Jemo
+						#r9.rate_widget
+							.chick_1.ratings_chick
+							.chick_2.ratings_chick
+							.chick_3.ratings_chick
+							.chick_4.ratings_chick
+							.chick_5.ratings_chick
+							.total_votes
+						#c10.chat_photo
+						h4#cmate_10 Jemo
+						#r10.rate_widget
+							.chick_1.ratings_chick
+							.chick_2.ratings_chick
+							.chick_3.ratings_chick
+							.chick_4.ratings_chick
+							.chick_5.ratings_chick
+							.total_votes
+						#c11.chat_photo
+						h4#cmate_11 Jemo
+						#r11.rate_widget
+							.chick_1.ratings_chick
+							.chick_2.ratings_chick
+							.chick_3.ratings_chick
+							.chick_4.ratings_chick
+							.chick_5.ratings_chick
+							.total_votes
+						#c12.chat_photo
+						h4#cmate_12 Jemo
+						#r12.rate_widget
+							.chick_1.ratings_chick
+							.chick_2.ratings_chick
+							.chick_3.ratings_chick
+							.chick_4.ratings_chick
+							.chick_5.ratings_chick
+							.total_votes
+						#c13.chat_photo
+						h4#cmate_13 Jemo
+						#r13.rate_widget
+							.chick_1.ratings_chick
+							.chick_2.ratings_chick
+							.chick_3.ratings_chick
+							.chick_4.ratings_chick
+							.chick_5.ratings_chick
+							.total_votes
+						#c14.chat_photo
+						h4#cmate_14 Jemo
+						#r14.rate_widget
+							.chick_1.ratings_chick
+							.chick_2.ratings_chick
+							.chick_3.ratings_chick
+							.chick_4.ratings_chick
+							.chick_5.ratings_chick
+							.total_votes
+						#c15.chat_photo
+						h4#cmate_15 Jemo
+						#r15.rate_widget
+							.chick_1.ratings_chick
+							.chick_2.ratings_chick
+							.chick_3.ratings_chick
+							.chick_4.ratings_chick
+							.chick_5.ratings_chick
+							.total_votes
+		include footer
+		script
+			$('.ratings_chick').hover(
+					function() {  
+						$(this).prevAll().andSelf().addClass('ratings_over');  
+						$(this).nextAll().removeClass('ratings_vote');   
+					},
+					function() {  
+						$(this).prevAll().andSelf().removeClass('ratings_over');  
+						set_votes($(this).parent());  
+					}  
+				);

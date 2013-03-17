@@ -2,6 +2,9 @@ $(function() {
 
   var socket = io.connect();
 
+  var room_members;
+  var room;
+  var me;
   socket.on('error', function (reason){
     console.error('Unable to connect Socket.IO', reason);
   });
@@ -13,20 +16,73 @@ $(function() {
   socket.on('participants complete', function (data){
 	    alert(JSON.stringify(data));
   });
+  
+  socket.on('start_chat', function (data){
+	    if(data){
+	    	alert("chat started!");
+	    	
+	    	    }
+	    ("tiemleft").dialog(exports.Timer);
+  });
+  
+  socket.on('members', function (data){
+	  data.members.forEach(function(user){
+		  user = JSON.parse(user);
+		  
+		  if(user.codename !=  $("#codename").html()){
+			  $(".current-photo").html("<img class='cpimg' src='"+user.photourl+"'></img>");
+		  }
+		  else{
+			  me = user;
+		  }
+	  });
+	  
+  });
+  
+  socket.on('room_members', function (data){
+	  room_members = data.members;
+	  room = data.room;
+	  var next_room = room + 1;
+	  var prev_room = room -1;
+	  if(next_room > room_members.length ){
+		  next_room = 1;
+	  }
+	  if(prev_room <= 0 ){
+		  prev_room = room_members.length;
+	  }
+	  room_members.forEach(function(room_visitor){
+		  if(room_visitor.room == next_room){
+			  var next_room_members = room_visitor.members;
+			  next_room_members.forEach(function(user){
+				  user = JSON.parse(user);
+				  if(me.gender != user.gender){
+					  $(".next-photo").html("<img class='npimg' src='"+user.photourl+"'></img>");
+				  }
+			  });
+			  
+		  }
+		  if(room_visitor.room == prev_room){
+			  var prev_room_members = room_visitor.members;
+			  prev_room_members.forEach(function(user){
+				  user = JSON.parse(user);
+				  if(me.gender != user.gender){
+					  $(".previous-photo").html("<img class='ppimg' src='"+user.photourl+"'></img>");
+				  }
+			  });
+			  
+		  }
+	  });
+	  
+  });
+  
+  
 
   socket.on('new msg', function(data) {
-	  var photo_url = "";
-	  if(data.provider == 'facebook'){
-		  photo_url = 'http://graph.facebook.com/' + data.nickname + '/picture';
-	  }
-	  else{
-		  photo_url = 'http://graph.facebook.com/' + data.nickname + '/picture';
-	  }
 	  if(data.gender == "male"){
-		  $(" .messagewindow ").append("<img class='leftp' src='"+photo_url+"'></img><p class='me-chat'>" + data.msg + "</p>");
+		  $(" .messagewindow ").append("<img class='leftp' src='"+data.photourl+"'></img><p class='me-chat'>" + data.msg + "</p>");
 	  }
 	  else{
-		  $(" .messagewindow ").append("<img class='rightp' src='"+photo_url+"'></img><p class='you-chat'>" + data.msg + "</p>");
+		  $(" .messagewindow ").append("<img class='rightp' src='"+data.photourl+"'></img><p class='you-chat'>" + data.msg + "</p>");
 	  }
   });
 

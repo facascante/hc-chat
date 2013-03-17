@@ -14,7 +14,7 @@ block content
 					.username-box
 						center
 							.username-wrapper
-								input#username(type='text', name='username')
+								input#username(type='text', name='username', maxlength='8')
 							button#submit(type='submit',name='submit')
 		include footer
 		script
@@ -46,3 +46,6 @@ block content
 					$('#but-male').css('background-position', '-128px 0').removeClass('s');
 				}
 			});
+			$('#submit')function removeSpaces(val) {
+ 					return val.split(' ').join('');
+}

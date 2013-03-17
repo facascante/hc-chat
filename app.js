@@ -11,15 +11,9 @@ var express = require('express')
   , redis = require("redis")
   , RedisStore = require("connect-redis")(express);
 
-
-var rtg   = require('url').parse("redis://redistogo:83fb6eafaf19fbd49eb0b33a08b66fdb@dory.redistogo.com:10325/");
-console.log(rtg);
-var client = exports.client  = redis.createClient(rtg.port,rtg.hostname);
-client.auth(rtg.auth.split(':')[1]); 
-var pub = exports.pub  = redis.createClient(rtg.port,rtg.hostname);
-pub.auth(rtg.auth.split(':')[1]); 
-var sub = exports.sub  = redis.createClient(rtg.port,rtg.hostname);
-sub.auth(rtg.auth.split(':')[1]); 
+var client = exports.client  = redis.createClient();
+var pub = exports.pub  = redis.createClient();
+var sub = exports.sub  = redis.createClient();
 var sessionStore = exports.sessionStore = new RedisStore({client: client});
 
 require('./strategy');
@@ -52,6 +46,7 @@ app.configure('development', function(){
 app.get('/', routes.index);
 app.get('/option',routes.option);
 app.post('/chat',routes.chat);
+app.get('/ranking',routes.ranking);
 app.get('/authfb', passport.authenticate('facebook'));
 app.get('/authtw', passport.authenticate('twitter'));
 app.get('/authfb/callback', passport.authenticate('facebook', {successRedirect: '/option',failureRedirect: '/'}));

@@ -23,5 +23,40 @@ block content
 			.chat-text
 				input#message(type='text', name='message')
 				button#reply(type='button',name='reply')
+				#dialog(hidden="hidden")
+					#countdown_dashboard
+						.dash(class="weeks_dash")
+							span.dash_title weeks
+							.digit
+								.top(style='display: none;') 0
+								.bottom(style='display: block;') 4
+							.digit
+								.top(style='display: none;') 0
+								.bottom(style='display: block;') 4
+								.dash(class="weeks_dash")
+						.dash(class="hours_dash")
+							span.dash_title hours
+							.digit
+								.top(style='display: none;') 0
+								.bottom(style='display: block;') 0
+							.digit
+								.top(style='display: none;') 0
+								.bottom(style='display: block;') 0
+						.dash(class="minutes_dash")
+							span.dash_title minutes
+							.digit
+								.top(style='display: none;') 5
+								.bottom(style='display: block;') 5
+							.digit
+								.top(style='display: none;') 9
+								.bottom(style='display: block;') 9
+						.dash(class="seconds_dash")
+							span.dash_title seconds
+							.digit
+								.top(style='display: none;') 0
+								.bottom(style='display: block;') 0
+							.digit
+								.top(style='display: none;') 0
+								.bottom(style='display: block;') 0
 	script(src="/socket.io/socket.io.js")
-	script(defer, src="/js/chat.js") 
+	script(defer, src="/js/chat.js")

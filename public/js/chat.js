@@ -18,13 +18,24 @@ $(function() {
   });
   
   socket.on('start_chat', function (data){
-	    if(data){
-	    	alert("chat started!");
-	    	
-	    	    }
-	    ("tiemleft").dialog(exports.Timer);
+	  alert(data);
+	    if(!data){
+	    	$("#dialog").dialog({
+	    		modal: true,
+	    		close: function( event, ui ) {
+
+	    		}
+	    	});
+	    }
+	    else{
+	    	$( "#dialog" ).dialog( "close" );
+	    }
+	    var dialog = $('#countdown_dashboard').countDown({
+	    	targetOffset: {
+		       'sec':      30
+		    }
+		});
   });
-  
   socket.on('members', function (data){
 	  data.members.forEach(function(user){
 		  user = JSON.parse(user);
@@ -55,7 +66,7 @@ $(function() {
 			  var next_room_members = room_visitor.members;
 			  next_room_members.forEach(function(user){
 				  user = JSON.parse(user);
-				  if(me.gender != user.gender){
+				  if(me && (me.gender != user.gender)){
 					  $(".next-photo").html("<img class='npimg' src='"+user.photourl+"'></img>");
 				  }
 			  });
@@ -65,7 +76,7 @@ $(function() {
 			  var prev_room_members = room_visitor.members;
 			  prev_room_members.forEach(function(user){
 				  user = JSON.parse(user);
-				  if(me.gender != user.gender){
+				  if(me && (me.gender != user.gender)){
 					  $(".previous-photo").html("<img class='ppimg' src='"+user.photourl+"'></img>");
 				  }
 			  });
@@ -84,6 +95,7 @@ $(function() {
 	  else{
 		  $(" .messagewindow ").append("<img class='rightp' src='"+data.photourl+"'></img><p class='you-chat'>" + data.msg + "</p>");
 	  }
+	  $(".messagewindow").prop({ scrollTop: $(".messagewindow").prop("scrollHeight") });
   });
 
   socket.on('user leave', function(data) {
@@ -129,3 +141,48 @@ $(function() {
 });
 
 
+jQuery(document).ready(function() {
+	$('#countdown_dashboard').countDown({
+		targetOffset: {
+			'day': 		0,
+			'month': 	0,
+			'year': 	0,
+			'hour': 	0,
+			'min': 		0,
+			'sec': 		0
+		}
+	});
+	set_by_offset();
+});
+
+// Set by specific date/time
+function set_by_date() {
+	$('#countdown_dashboard').stopCountDown();
+	$('#countdown_dashboard').setCountDown({
+		targetDate: {
+			'day': 		15,
+			'month': 	1,
+			'year': 	2011,
+			'hour': 	12,
+			'min': 		0,
+			'sec': 		0
+		}
+	});
+	$('#countdown_dashboard').startCountDown();
+}
+
+// Set by date/time offset
+function set_by_offset() {
+	$('#countdown_dashboard').stopCountDown();
+	$('#countdown_dashboard').setCountDown({
+		targetOffset: {
+			'day': 		1,
+			'month': 	1,
+			'year': 	0,
+			'hour': 	1,
+			'min': 		1,
+			'sec': 		1
+		}
+	});
+	$('#countdown_dashboard').startCountDown();
+}

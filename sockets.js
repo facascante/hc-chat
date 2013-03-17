@@ -12,7 +12,7 @@ var parent = module.parent.exports
   , cookie = require("cookie");
   
 var io = sio.listen(server);
-
+io.set('log level', 1);
 io.set('authorization', function (hsData, accept) {
   if(hsData.headers.cookie) {
     var cookies = cookieParser(cookie.parse(hsData.headers.cookie), "hatchcatch")
@@ -41,14 +41,23 @@ io.configure(function() {
   io.enable('browser client gzip');
 });
 
-var client_count = 0;
-var timer_start = false;
-io.sockets.on('connection', function (socket) {
-  client_count++;
-  if(client_count == 1){
-	timer_start = true;
-  }
+var timer_start =false;
 
+io.sockets.on('connection', function (socket) {
+  
+	if(!timer_start){
+		timer.Timer(function(){
+			console.log("timer started");
+			model.roomList(client,function(err,rooms){
+				rooms.forEach(function(room){
+					console.log("timer stopped:" + room);
+					io.sockets.in(room).emit('start_chat', true); 
+				});
+			});
+			
+		},30000);
+		timer_start = true;
+	}
   var hs = socket.handshake.hatchcatch.user
     , username = hs.username
     , provider = hs.provider
@@ -69,14 +78,12 @@ io.sockets.on('connection', function (socket) {
     		  room_ctr = true;
     		  console.log(JSON.stringify(user) + " - " + room);
               socket.join(room); 
+              io.sockets.in(room).emit('start_chat', false); 
               model.roomMembers(client,function(err,roomVisitors){
             	  roomVisitors.forEach(function(roomVisitor){
-            		  if(timer_start){
-            			  io.sockets.in(roomVisitor.room).emit('start_chat', true); 
-            		  }
             		  io.sockets.in(roomVisitor.room).emit('room_members', {room: roomVisitor.room, members : roomVisitors});  
             	  }); 
-            	  timer_start = false;
+            	  
               });
               model.roomVisitors(client,room,function(err,visitor){
             	  if(visitor.length == 2){
@@ -101,7 +108,6 @@ io.sockets.on('connection', function (socket) {
               });
                 
               socket.on('disconnect', function() {
-            	  client_count--;
                 //model.removeVisitor(client,room,user);
               });
     	  }

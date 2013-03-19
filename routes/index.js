@@ -1,3 +1,4 @@
+var model = require("../client");
 
 /*
  * GET home page.
@@ -14,6 +15,3 @@ exports.chat = function(req,res){
    req.user.codename = req.body.username;
    res.render('chat',{user:req.user});
 };
-exports.ranking = function(req, res){
-	  res.render('ranking');
-	};

@@ -9,6 +9,7 @@ var express = require('express')
   , passport = require('passport')
   , path = require('path')
   , redis = require("redis")
+  , model = require("./client")
   , RedisStore = require("connect-redis")(express);
 
 var client = exports.client  = redis.createClient();
@@ -32,6 +33,12 @@ app.configure(function(){
         key: "hatchcatch",
         store: sessionStore
   }));
+  app.use(
+		  function(req,res,next){
+			  req.client = exports.client;
+			  next();
+		  }
+  );
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(express.static(path.join(__dirname, 'public')));
@@ -43,16 +50,56 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
+function restrict(req,res,next){
+	if(req.isAuthenticated()){
+		next();
+	}
+	else{
+		req.logout();
+		res.redirect('/');
+	}
+}
 app.get('/', routes.index);
-app.get('/option',routes.option);
-app.post('/chat',routes.chat);
-app.get('/ranking',routes.ranking);
+app.get('/option',restrict,routes.option);
+app.post('/chat',restrict,routes.chat);
 app.get('/authfb', passport.authenticate('facebook'));
 app.get('/authtw', passport.authenticate('twitter'));
 app.get('/authfb/callback', passport.authenticate('facebook', {successRedirect: '/option',failureRedirect: '/'}));
 app.get('/authtw/callback', passport.authenticate('twitter', {successRedirect: '/option',failureRedirect: '/'}));
-
+app.get('/ranking',restrict,function(req, res){
+      var client = redis.createClient();
+	  var members = new Array();
+	  var ctr = 0;
+	  model.roomList(client,function(err,rooms){
+		  if(rooms && rooms.length){
+			  rooms.forEach(function(room){
+				  console.log(room);
+				  model.roomVisitors(client,room,function(visitors){
+					  console.log("===============");
+					  console.log(visitors);
+					  ctr++;
+					  if(visitors && visitors.length){
+						  console.log(visitors);
+						  visitors.forEach(function(visitor){
+							  console.log(visitor);
+							  members.push(JSON.parse(visitor));
+						  });
+					  }
+					  if(ctr >= rooms.length){
+						  console.log("chito");
+						  console.log(members);
+						  res.render('ranking',{members:members});
+					  }
+				  });
+			  });
+		  }
+		  else{
+			  res.render('ranking',{members:members});
+		  }
+	  });
+});
 app.get('/logout', function(req, res){
+	
     req.logout();
 	res.redirect('/');
 });
@@ -65,9 +112,8 @@ require('./sockets');
 
 client.keys('hc:*', function(err, keys) {
     keys.forEach(function(key){client.del(key)});
-    //console.log(keys);
-  //  if(keys.length) client.del(keys);
     console.log('Deletion of all redis reference ', err || "Done!");
 });
+
 
 

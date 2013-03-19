@@ -12,14 +12,7 @@ $(function() {
   socket.on('connect', function (){
     console.info('successfully established a working connection');
   });
-  
-  socket.on('participants complete', function (data){
-	    alert(JSON.stringify(data));
-  });
-  
-  socket.on('switch_room', function (data){
-	    
-  });
+
   socket.on('start_chat', function (data){
 	    if(!data){
 	    	$("#dialog").dialog({
@@ -39,7 +32,6 @@ $(function() {
 	    }
   });
   socket.on('members', function (data){
-	  alert(data);
 	  data.members.forEach(function(user){
 		  user = JSON.parse(user);
 		  
@@ -55,7 +47,7 @@ $(function() {
   
   socket.on('rank_start', function (data){
 	  
-	  window.location = '/ranking'
+	 // window.location = '/ranking'
   });
   socket.on('room_members', function (data){
 	  room_members = data.members;
@@ -173,8 +165,8 @@ function set_by_offset() {
 			'month': 	0,
 			'year': 	0,
 			'hour': 	0,
-			'min': 		0,
-			'sec': 		30
+			'min': 		20,
+			'sec': 		0
 		}
 	});
 	$('#countdown_dashboard').startCountDown();

@@ -27,6 +27,7 @@ if(config.auth.twitter.consumerkey.length) {
       callbackURL: config.auth.twitter.callback
     },
     function(token, tokenSecret, profile, done) {
+      profile.photourl = profile.profile_image_url;
       return done(null, profile);
     }
   ));

@@ -12,10 +12,8 @@ module.exports = {
         });  
     },
     roomVisitors : function(client,room,fn){
+    	console.log('hc:room:'+room+':visitor');
     	client.smembers('hc:room:'+room+':visitor',function(err, visitors){
-            console.log("Getting Visitors: " + visitors.length);
-            console.log('hc:room:'+room+':visitor');
-            console.log(visitors);
             if(err){
                 fn(err);
             }

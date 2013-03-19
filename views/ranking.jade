@@ -10,142 +10,32 @@ block content
 			.ranking-selection-box
 				.ranking-selection-list
 					.ranking-left
-						#c1.chat_photo
-						h4#cmate_1 Jemoveldad 21 -
-						#r1.rate_widget
-							.chick_1.ratings_chick
-							.chick_2.ratings_chick
-							.chick_3.ratings_chick
-							.chick_4.ratings_chick
-							.chick_5.ratings_chick
-							.total_votes
-						#c2.chat_photo
-						h4#cmate_2 Jemo
-						#r2.rate_widget
-							.chick_1.ratings_chick
-							.chick_2.ratings_chick
-							.chick_3.ratings_chick
-							.chick_4.ratings_chick
-							.chick_5.ratings_chick
-							.total_votes
-						#c3.chat_photo
-						h4#cmate_3 Jemo
-						#r3.rate_widget
-							.chick_1.ratings_chick
-							.chick_2.ratings_chick
-							.chick_3.ratings_chick
-							.chick_4.ratings_chick
-							.chick_5.ratings_chick
-							.total_votes
-						#c4.chat_photo
-						h4#cmate_4 Jemo
-						#r4.rate_widget
-							.chick_1.ratings_chick
-							.chick_2.ratings_chick
-							.chick_3.ratings_chick
-							.chick_4.ratings_chick
-							.chick_5.ratings_chick
-							.total_votes
-						#c5.chat_photo
-						h4#cmate_5 Jemo
-						#r5.rate_widget
-							.chick_1.ratings_chick
-							.chick_2.ratings_chick
-							.chick_3.ratings_chick
-							.chick_4.ratings_chick
-							.chick_5.ratings_chick
-							.total_votes
-						#c6.chat_photo
-						h4#cmate_6 Jemo
-						#r6.rate_widget
-							.chick_1.ratings_chick
-							.chick_2.ratings_chick
-							.chick_3.ratings_chick
-							.chick_4.ratings_chick
-							.chick_5.ratings_chick
-							.total_votes
-						#c7.chat_photo
-						h4#cmate_7 Jemo
-						#r7.rate_widget
-							.chick_1.ratings_chick
-							.chick_2.ratings_chick
-							.chick_3.ratings_chick
-							.chick_4.ratings_chick
-							.chick_5.ratings_chick
-							.total_votes
-						#c8.chat_photo
-						h4#cmate_8 Jemo
-						#r8.rate_widget
-							.chick_1.ratings_chick
-							.chick_2.ratings_chick
-							.chick_3.ratings_chick
-							.chick_4.ratings_chick
-							.chick_5.ratings_chick
-							.total_votes
+					- var members = members, i =0, j =0
+					each member in members
+						- i++
+						- if(i <= 8){
+							img#codename.chat_photo(img='')
+							p codename
+							#r1.rate_widget
+								.codename_1.ratings_chick
+								.codename_2.ratings_chick
+								.codename_3.ratings_chick
+								.codename_4.ratings_chick
+								.codename_5.ratings_chick
+						- }
 					.ranking-right
-						#c9.chat_photo
-						h4#cmate_9 Jemo
-						#r9.rate_widget
-							.chick_1.ratings_chick
-							.chick_2.ratings_chick
-							.chick_3.ratings_chick
-							.chick_4.ratings_chick
-							.chick_5.ratings_chick
-							.total_votes
-						#c10.chat_photo
-						h4#cmate_10 Jemo
-						#r10.rate_widget
-							.chick_1.ratings_chick
-							.chick_2.ratings_chick
-							.chick_3.ratings_chick
-							.chick_4.ratings_chick
-							.chick_5.ratings_chick
-							.total_votes
-						#c11.chat_photo
-						h4#cmate_11 Jemo
-						#r11.rate_widget
-							.chick_1.ratings_chick
-							.chick_2.ratings_chick
-							.chick_3.ratings_chick
-							.chick_4.ratings_chick
-							.chick_5.ratings_chick
-							.total_votes
-						#c12.chat_photo
-						h4#cmate_12 Jemo
-						#r12.rate_widget
-							.chick_1.ratings_chick
-							.chick_2.ratings_chick
-							.chick_3.ratings_chick
-							.chick_4.ratings_chick
-							.chick_5.ratings_chick
-							.total_votes
-						#c13.chat_photo
-						h4#cmate_13 Jemo
-						#r13.rate_widget
-							.chick_1.ratings_chick
-							.chick_2.ratings_chick
-							.chick_3.ratings_chick
-							.chick_4.ratings_chick
-							.chick_5.ratings_chick
-							.total_votes
-						#c14.chat_photo
-						h4#cmate_14 Jemo
-						#r14.rate_widget
-							.chick_1.ratings_chick
-							.chick_2.ratings_chick
-							.chick_3.ratings_chick
-							.chick_4.ratings_chick
-							.chick_5.ratings_chick
-							.total_votes
-						#c15.chat_photo
-						h4#cmate_15 Jemo
-						#r15.rate_widget
-							.chick_1.ratings_chick
-							.chick_2.ratings_chick
-							.chick_3.ratings_chick
-							.chick_4.ratings_chick
-							.chick_5.ratings_chick
-							.total_votes
+					each member in members
+						- j++
+						- if(j > 8){
+							img#codename.chat_photo(img='')
+							p codename
+							#r1.rate_widget
+								.codename_1.ratings_chick
+								.codename_2.ratings_chick
+								.codename_3.ratings_chick
+								.codename_4.ratings_chick
+								.codename_5.ratings_chick
+						- }
 		include footer
 		script
 			$('.ratings_chick').hover(
@@ -156,4 +46,9 @@ block content
 					function() {  
 						$(this).prevAll().andSelf().removeClass('ratings_over');
 					}  
-				);
+			);
+			$('.ratings_chick').click(
+					function(){
+						alert($(this).attr('class'));
+					}
+			);

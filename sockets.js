@@ -148,13 +148,15 @@ io.sockets.on('connection', function (socket) {
       						if(switch_ctr >= rooms.length){
       							clearInterval(stopper);
       							io.sockets.in(room).emit('rank_start', true); 
+      							timer_start = false;
       						}
       						switchRoom(socket,room,user,rooms);
-      					},20000);
+          				},30000);
+      				//	},120000);
 
           			});
-          			
-          		},30000);
+          		},20000);
+          	//	},1200000);
           		timer_start = true;
           	 }
                 

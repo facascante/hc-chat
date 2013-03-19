@@ -384,3 +384,183 @@ footer a, footer p {
     margin: -2% 0;
     width: 52px;
 }
+
+
+
+.ranking-container .ranking-selection-box .ranking-selection-list .ranking-left .rate_widget .ratings_chick{
+  background: url("/img/hc-theme/chick-hide.png") no-repeat scroll 0 -5px transparent;
+    float: left;
+    height: 29px;
+    padding: 3px;
+    width: 29px;
+}
+
+.ranking-container .ranking-selection-box .ranking-selection-list .ranking-right .rate_widget .ratings_chick{
+  background: url("/img/hc-theme/chick-hide.png") no-repeat scroll 0 -5px transparent;
+    float: left;
+    height: 29px;
+    padding: 3px;
+    width: 29px;
+}
+
+.ranking-container .ranking-selection-box .ranking-selection-list .ranking-left .rate_widget {  
+    border: 0px solid #CCCCCC;
+    float: left;
+    height: 6%;
+    left: 0;
+    margin: 5% 0 6% 2px;
+    overflow: visible;
+    padding: 1px;
+    position: relative;
+    width: 55%;
+}
+
+.ranking-container .ranking-selection-box .ranking-selection-list .ranking-right .rate_widget {  
+    border: 0px solid #CCCCCC;
+    float: left;
+    height: 6%;
+    left: 0;
+    margin: 5% 0 6% 2px;
+    overflow: visible;
+    padding: 1px;
+    position: relative;
+    width: 55%;
+}
+
+.ranking-container .ranking-selection-box .ranking-selection-list .ranking-left .chat_photo {  
+    border: 1px solid #CCCCCC;
+    float: left;
+    height: 60px;
+    left: 32%;
+    margin: 5px 0;
+    top: 2%;
+    width: 60px;
+}
+
+.ranking-container .ranking-selection-box .ranking-selection-list .ranking-right .chat_photo {  
+    border: 1px solid #CCCCCC;
+    float: left;
+    height: 60px;
+    left: 32%;
+    margin: 5px 0;
+    top: 2%;
+    width: 60px;
+}
+
+.ranking-container .ranking-selection-box .ranking-selection-list .ranking-left .rate_widget .ratings_vote {  
+    background: url('/img/hc-theme/chick-show.png') no-repeat scroll 0 -5px transparent;  
+}
+
+.ranking-container .ranking-selection-box .ranking-selection-list .ranking-right .rate_widget .ratings_vote {  
+    background: url('/img/hc-theme/chick-show.png') no-repeat scroll 0 -5px transparent;  
+}
+
+.ranking-container .ranking-selection-box .ranking-selection-list .ranking-left .rate_widget .ratings_over {  
+    background: url('/img/hc-theme/chick-show.png') no-repeat scroll 0 -5px transparent;  
+}
+
+.ranking-container .ranking-selection-box .ranking-selection-list .ranking-right .rate_widget .ratings_over {  
+    background: url('/img/hc-theme/chick-show.png') no-repeat scroll 0 -5px transparent;  
+}
+
+.ranking-container .ranking-selection-box .ranking-selection-list {  
+    border: 0px solid #CCCCCC;
+    height: 360px;
+    left: 26%;
+    overflow-y: scroll;
+    position: relative;
+    top: 11%;
+    width: 50%;
+}
+
+.ranking-container .ranking-selection-box .ranking-selection-list .ranking-left{  
+    border: 0px solid #000000;
+    float: left;
+    height: 580px;
+    left: 0;
+    overflow: visible;
+    position: relative;
+    top: 2px;
+    width: 49%;
+}
+
+.ranking-container .ranking-selection-box .ranking-selection-list .ranking-right{  
+    border: 0px solid #000000;
+    float: right;
+    height: 580px;
+    left: 0;
+    overflow: visible;
+    position: relative;
+    top: 2px;
+    width: 49%;
+}
+h4{
+  border: 0px solid #000000;
+    float: left;
+    font-family: times new roman;
+    margin: 5% 2px;
+    top: 0;
+    width: 70px;
+    text-wrap: normal;
+    vertical-align: middle;
+}
+
+.ranking-container {
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  position: relative;
+}
+
+.ranking-container .ranking-selection-box {
+  background: url("/img/hc-theme/score-sheet.png") no-repeat scroll 51.5% -7px transparent;
+  background-size: -moz-calc();
+  height: 500px;  
+}
+
+.ranking-container .ranking-selection-box .good{
+  border: 0px solid #000000;
+  background-attachment: inherit;
+    background-clip: inherit;
+    background-color: transparent;
+    background-image: url("/img/hc-theme/g-score.png");
+    background-origin: padding-box;
+    background-position: 1px 0;
+    background-repeat: no-repeat;
+    height: 10%;
+    width: 2.5%;
+   margin: 110px 0 0 34%;
+}
+
+.ranking-container .ranking-selection-box .submit-part {
+  background-attachment: fixed;
+    background-clip: inherit;
+    background-color: transparent;
+    background-image: none;
+    background-origin: padding-box;
+    background-position: 55% -1%;
+    background-repeat: no-repeat;
+    border: 0px solid #000000;
+    height: 13%;
+    margin: 5% 0;
+    width: 100%;
+}
+
+.ranking-container .ranking-selection-box .submit-part #submit_rating{
+  background: url("/img/hc-theme/button-rate.png") no-repeat scroll 0 0 transparent;
+    border: 0 solid #000000;
+    height: 80%;
+    margin: 5px 43%;
+    width: 16%;
+    cursor: pointer;
+}
+body.ranking-page {
+    margin:0 0 0 0;
+    background-attachment: fixed;
+    background-clip: border-box;
+    background-color: transparent;
+    background-image: url("/img/hc-theme/ranking-bg.png");
+    background-origin: padding-box;
+    background-repeat: no-repeat;
+    background-size: 100% 110%;
+}

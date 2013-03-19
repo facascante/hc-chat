@@ -17,26 +17,29 @@ $(function() {
 	    alert(JSON.stringify(data));
   });
   
+  socket.on('switch_room', function (data){
+	    
+  });
   socket.on('start_chat', function (data){
-	  alert(data);
 	    if(!data){
 	    	$("#dialog").dialog({
+	    		closeOnEscape: false,
+	    		open: function(event, ui) { 
+	    			$(this).parent().children().children('.ui-dialog-titlebar-close').hide();
+	    		},
 	    		modal: true,
 	    		close: function( event, ui ) {
 
 	    		}
 	    	});
+	    	set_by_offset();
 	    }
 	    else{
 	    	$( "#dialog" ).dialog( "close" );
 	    }
-	    var dialog = $('#countdown_dashboard').countDown({
-	    	targetOffset: {
-		       'sec':      30
-		    }
-		});
   });
   socket.on('members', function (data){
+	  alert(data);
 	  data.members.forEach(function(user){
 		  user = JSON.parse(user);
 		  
@@ -50,6 +53,10 @@ $(function() {
 	  
   });
   
+  socket.on('rank_start', function (data){
+	  
+	  window.location = '/ranking'
+  });
   socket.on('room_members', function (data){
 	  room_members = data.members;
 	  room = data.room;
@@ -141,20 +148,6 @@ $(function() {
 });
 
 
-jQuery(document).ready(function() {
-	$('#countdown_dashboard').countDown({
-		targetOffset: {
-			'day': 		0,
-			'month': 	0,
-			'year': 	0,
-			'hour': 	0,
-			'min': 		0,
-			'sec': 		0
-		}
-	});
-	set_by_offset();
-});
-
 // Set by specific date/time
 function set_by_date() {
 	$('#countdown_dashboard').stopCountDown();
@@ -176,12 +169,12 @@ function set_by_offset() {
 	$('#countdown_dashboard').stopCountDown();
 	$('#countdown_dashboard').setCountDown({
 		targetOffset: {
-			'day': 		1,
-			'month': 	1,
+			'day': 		0,
+			'month': 	0,
 			'year': 	0,
-			'hour': 	1,
-			'min': 		1,
-			'sec': 		1
+			'hour': 	0,
+			'min': 		0,
+			'sec': 		30
 		}
 	});
 	$('#countdown_dashboard').startCountDown();

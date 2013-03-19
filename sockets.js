@@ -42,22 +42,47 @@ io.configure(function() {
 });
 
 var timer_start =false;
+var switch_ctr = 0;
+function switchRoom(socket,room,user,rooms){
+	console.log("second timer started");
+	
+		console.log("second timer stopped");
+		if(user.gender == "female"){
+			
+			socket.leave(room);
+			
+			var nroom;
+			console.log("(Number(room) + 1)");
+			console.log((Number(room) + 1));
+			console.log(rooms.length);
+			if((Number(room) + 1) >= rooms.length){
+				nroom = 1;
+			}
+			else{
+				nroom = Number(room) + 1;
+			}
+			socket.join(nroom);
+			
+			model.switchVisitorRoom(client,room,nroom,user,function(err,result){
+				console.log(err);
+				console.log(result);
+				if(result){
+					model.roomVisitors(client,nroom,function(err,visitor){
+		            	  if(visitor.length == 2){
+		            		  io.sockets.in(nroom).emit('members', {members : visitor}); 
+		            		  console.log("timer switched:" + nroom);
+		            	  }
+		            });
+					
+				}
+			});
+			
+		}
+		switch_ctr++;
+}
 
 io.sockets.on('connection', function (socket) {
   
-	if(!timer_start){
-		timer.Timer(function(){
-			console.log("timer started");
-			model.roomList(client,function(err,rooms){
-				rooms.forEach(function(room){
-					console.log("timer stopped:" + room);
-					io.sockets.in(room).emit('start_chat', true); 
-				});
-			});
-			
-		},30000);
-		timer_start = true;
-	}
   var hs = socket.handshake.hatchcatch.user
     , username = hs.username
     , provider = hs.provider
@@ -71,9 +96,13 @@ io.sockets.on('connection', function (socket) {
 		  		gender: hs.gender, 
 		  		photourl: hs.photourl
   };
+	
   var room_ctr = false;
+  
   model.accomodateVisitor(client,user,function(err,room){
       if(room){
+    	  console.log(room);
+    	  room = Number(room);
     	  if(!room_ctr){
     		  room_ctr = true;
     		  console.log(JSON.stringify(user) + " - " + room);
@@ -106,6 +135,28 @@ io.sockets.on('connection', function (socket) {
                   });        
                 }   
               });
+              
+              if(!timer_start){
+          		timer.Timer(function(){
+          			model.roomList(client,function(err,rooms){
+          				rooms.forEach(function(room){
+          					io.sockets.in(room).emit('start_chat', true); 
+
+          				});
+          				var stopper = setInterval(function(){
+      						
+      						if(switch_ctr >= rooms.length){
+      							clearInterval(stopper);
+      							io.sockets.in(room).emit('rank_start', true); 
+      						}
+      						switchRoom(socket,room,user,rooms);
+      					},20000);
+
+          			});
+          			
+          		},30000);
+          		timer_start = true;
+          	 }
                 
               socket.on('disconnect', function() {
                 //model.removeVisitor(client,room,user);

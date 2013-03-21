@@ -67,7 +67,6 @@ app.get('/authtw', passport.authenticate('twitter'));
 app.get('/authfb/callback', passport.authenticate('facebook', {successRedirect: '/option',failureRedirect: '/'}));
 app.get('/authtw/callback', passport.authenticate('twitter', {successRedirect: '/option',failureRedirect: '/'}));
 app.get('/ranking',restrict,function(req, res){
-      var client = redis.createClient();
 	  var members = new Array();
 	  var ctr = 0;
 	  model.roomList(client,function(err,rooms){
@@ -111,9 +110,13 @@ exports.server = http.createServer(app).listen(app.get('port'), function(){
 require('./sockets');
 
 client.keys('hc:*', function(err, keys) {
-    keys.forEach(function(key){client.del(key)});
+	if(keys){
+		keys.forEach(function(key){client.del(key)});
+	}
+    
     console.log('Deletion of all redis reference ', err || "Done!");
 });
+
 
 
 

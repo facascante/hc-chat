@@ -36,12 +36,17 @@ $(function() {
 		  user = JSON.parse(user);
 		  
 		  if(user.codename !=  $("#codename").html()){
+
 			  $(".current-photo").html("<img class='cpimg' src='"+user.photourl+"'></img>");
 		  }
 		  else{
 			  me = user;
 		  }
 	  });
+	  
+  });
+  socket.on('reload', function (data){
+	  location.reload(data);
 	  
   });
   

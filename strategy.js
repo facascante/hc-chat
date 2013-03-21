@@ -28,7 +28,9 @@ if(config.auth.twitter.consumerkey.length) {
     },
     function(token, tokenSecret, profile, done) {
       profile.photourl = profile.profile_image_url;
+      console.log(profile);
       return done(null, profile);
+      
     }
   ));
 } 
@@ -42,6 +44,7 @@ if(config.auth.facebook.clientid.length) {
     function(accessToken, refreshToken, profile, done) {
       profile.photourl = 'http://graph.facebook.com/'+profile.username+'/picture';
       return done(null, profile);
+      console.log(profile);
     }
   ));
 }

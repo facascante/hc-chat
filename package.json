@@ -15,6 +15,7 @@
     "redis": "*",
     "connect-redis": "*",
     "connect": "*",
-    "cookie": "*"
+    "cookie": "*",
+    "async": "*"
   }
 }

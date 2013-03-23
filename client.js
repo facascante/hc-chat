@@ -66,9 +66,7 @@ module.exports = {
     			if(rooms && rooms.length){
     				var room_ctr = 1;
     				rooms.forEach(function(room){
-    					console.log(room);
     					client.smembers('hc:room:'+room+':visitor',function(err,visitors){
-    						console.log(visitors);
     						if(visitors && visitors.length){
     							room_visitors.push({room:room_ctr,members:visitors});
     						}
@@ -87,7 +85,6 @@ module.exports = {
     			console.log('CheckMe');
     			var room_visitors = result.GetVisitors;
     			var flag = false;
-    			console.log(room_visitors);
     			room_visitors.forEach(function(room_visitor){
     				var members = room_visitor.members;
     				members.forEach(function(visitor){
@@ -147,8 +144,6 @@ module.exports = {
     				var room = room_visitor.room;
     				var room_visitors = result.GetVisitors;
     				var members = room_visitor.members;
-    				console.log(result.GetVisitors);
-    				console.log(room_visitor);
     				if(members.length == 1){
     					if(room == 0){
     						room = Number(room_visitors.length) + 1;
@@ -179,6 +174,10 @@ module.exports = {
     			else{
     				cb(null,isExist.room);
     			}
+    		}],
+    		getRoomMembers : ['RecordToRedis',function(cb,result){
+    			var room = result.RecordToRedis;
+    			client.smembers('hc:room:'+room+':visitor',cb);
     		}]
     		
     	},function(err,result){
@@ -186,16 +185,124 @@ module.exports = {
     		else {
     			console.log(result);
     		}
-    		fn(err,result.RecordToRedis);
+    		fn(err,result);
     	});
     	
     },
-    switchVisitorRoom : function(client,room,user,fn){
-    	
+    switchVisitorRoom : function(client,fn){
+    	console.log('switch');
     	async.auto({
-    		
+    		GetRooms : function(cb){
+    			console.log('GetRooms');
+    			client.sort('hc:rooms',cb);
+    		},
+    		GetVisitors : ['GetRooms', function(cb,result){
+    			console.log('GetVisitors');
+    			var rooms = result.GetRooms;
+    			var room_visitors = new Array();
+    			if(rooms && rooms.length){
+    				var room_ctr = 1;
+    				rooms.forEach(function(room){
+    					client.smembers('hc:room:'+room+':visitor',function(err,visitors){
+    						if(visitors && visitors.length){
+    							room_visitors.push({room:room_ctr,members:visitors});
+    						}
+    						room_ctr++;
+    						if(room_ctr > rooms.length){
+    							cb(null,room_visitors);
+    						}
+    					});
+    				});
+    			}
+    			else{
+    				cb(null,room_visitors);
+    			}
+    		}],
+    		separateGenders : ['GetVisitors',function(cb,result){
+    			console.log('separateGenders');
+    			var rooms = result.GetVisitors;
+    			var males = new Array();
+    			var females = new Array();
+    			if(rooms && rooms.length){
+    				rooms.forEach(function(room){
+    					var members = room.members;
+    					if(members && members.length){
+    						members.forEach(function(member){
+    							member = JSON.parse(member);
+    							if(member.gender == 'male'){
+    								males.push(member);
+    							}
+    							if(member.gender == 'female'){
+    								females.push(member);
+    							}
+    						});
+    					}
+    				});
+    			}
+    			cb(null,{males:males,females:females})
+    		}],
+    		switchPartner : ['separateGenders',function(cb,result){
+    			console.log('switchPartner');
+    			var males = result.separateGenders.males;
+    			var females = result.separateGenders.females;
+    			var counter = (males.length < females.length) ? males.length : females.length;
+    			var rooms = new Array();
+    			console.log("===========================================");
+    			for(var i=0; i< counter; i++){
+    				var room = {};
+    				room.no = i + 1;
+    				room.members = new Array();
+    				room.members.push(males[i]);
+    				room.members.push(females[counter - i - 1]);
+    				rooms.push(room);
+    			}
+    			console.log("===========================================");
+    			console.log(JSON.stringify(rooms));
+    			cb(null,rooms)
+    		}],
+    		cleanRoom : ['switchPartner',function(cb,result){
+    			console.log('cleanRoom');
+    			client.keys('hc:*', function(err, keys) {
+    				if(keys){
+    					var key_ctr = 0;
+    					keys.forEach(function(key){client.del(key,function(err,result){
+    						key_ctr++;
+    						if(key_ctr >= keys.length){
+    							cb(null,true);
+    						}
+    					})});
+    				}
+    			});
+    		}],
+    		saveToRedis : ['cleanRoom',function(cb,result){
+    			console.log('saveToRedis');
+    			var rooms = result.switchPartner;
+    			if(rooms && rooms.length){
+    				var room_ctr = 0;
+    				rooms.forEach(function(room){
+    					client.sadd('hc:rooms',room.no);
+    					client.sadd('hc:room:'+room.no+':visitor',JSON.stringify(room.members[0]));
+    					client.sadd('hc:room:'+room.no+':visitor',JSON.stringify(room.members[1]));
+    					room_ctr++;
+    					if(room_ctr >= rooms.length){
+    						cb(null,true);
+    					}
+    				});
+    			}
+    			else{
+    				cb(null,true);
+    			}
+    			
+    		}]
     	},function(err,result){
-    		
+    		if(err){
+    			console.log(err);
+    			fn(err);
+    		}
+    		else{
+    			console.log(result);
+    			fn(null,result);
+    		}
     	});
     },
     addVisitor : function(client,room,visitor){

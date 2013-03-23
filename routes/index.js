@@ -11,15 +11,15 @@ exports.option = function(req, res){
   res.render('option');
 };
 exports.chat = function(req,res){
-	console.log(req.body);
-   req.user.gender = req.body['gender-m'] || req.body['gender-f'] || req.user.gender;
+	console.log(req.query);
+   req.user.gender = req.query['gender-m'] || req.query['gender-f'] || req.user.gender;
    console.log(req.user.gender);
-   if((req.body['gender-m'] || req.body['gender-f']) && req.body.username){
-	   req.user.codename = req.body.username;
+   if((req.query['gender-m'] || req.query['gender-f']) && req.query.username){
+	   req.user.codename = req.query.username;
 	   res.render('chat',{user:req.user});
    }
    else{
-	   res.render('option');
+	   res.render('chat',{user:req.user});
    }
    
 };

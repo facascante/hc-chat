@@ -365,20 +365,27 @@ footer a, footer p {
     text-decoration: none;
 }
 .cpimg {
-    height: 114px;
-    margin: 20% 53% 32% 15%;
-    width: 129px;
+border-radius: 58px 58px 58px 58px;
+height: 166px;
+margin: 7% 32% 1% 6%;
+width: 168px;
 }
+
+
 .npimg {
-    height: 95px;
-    margin: 23% 18%;
-    width: 96px;
+    border-radius: 38px 38px 40px 41px;
+    height: 120px;
+    margin: 14% 9%;
+    width: 122px;
 }
+
 .ppimg {
-    height: 96px;
-    margin: 22% 17%;
-    width: 96px;
+    border-radius: 36px 34px 39px 41px;
+    height: 120px;
+    margin: 15% 9%;
+    width: 123px;
 }
+
 .pcn {
     height: 26px;
     margin: -2% 0;

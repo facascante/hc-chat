@@ -61,41 +61,15 @@ function restrict(req,res,next){
 }
 app.get('/', routes.index);
 app.get('/option',restrict,routes.option);
-app.post('/chat',restrict,routes.chat);
+app.get('/chat',restrict,routes.chat);
 app.get('/authfb', passport.authenticate('facebook'));
 app.get('/authtw', passport.authenticate('twitter'));
 app.get('/authfb/callback', passport.authenticate('facebook', {successRedirect: '/option',failureRedirect: '/'}));
 app.get('/authtw/callback', passport.authenticate('twitter', {successRedirect: '/option',failureRedirect: '/'}));
 app.get('/ranking',restrict,function(req, res){
-	  var members = new Array();
-	  var ctr = 0;
-	  model.roomList(client,function(err,rooms){
-		  if(rooms && rooms.length){
-			  rooms.forEach(function(room){
-				  console.log(room);
-				  model.roomVisitors(client,room,function(visitors){
-					  console.log("===============");
-					  console.log(visitors);
-					  ctr++;
-					  if(visitors && visitors.length){
-						  console.log(visitors);
-						  visitors.forEach(function(visitor){
-							  console.log(visitor);
-							  members.push(JSON.parse(visitor));
-						  });
-					  }
-					  if(ctr >= rooms.length){
-						  console.log("chito");
-						  console.log(members);
-						  res.render('ranking',{members:members});
-					  }
-				  });
-			  });
-		  }
-		  else{
-			  res.render('ranking',{members:members});
-		  }
-	  });
+
+	res.render('ranking',{members:members});
+
 });
 app.get('/logout', function(req, res){
 	

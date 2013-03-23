@@ -6,8 +6,8 @@
       "callback" : "http://54.251.215.151:3000/authtw/callback"
     },
     "facebook": {
-      "clientid" : "447241648681212",
-      "clientsecret" : "0425c311c7896527fa7cab47731ee8c1",
+      "clientid" : "474125875979678",
+      "clientsecret" : "0b752850af7677b8416dc47c856fad7b",
       "callback" : "http://54.251.215.151:3000/authfb/callback"
     }
   }

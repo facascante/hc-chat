@@ -13,6 +13,10 @@ $(function() {
     console.info('successfully established a working connection');
   });
 
+socket.on('switch_room', function (data){
+	window.location = '/chat';
+});
+
   socket.on('start_chat', function (data){
 	    if(!data){
 	    	$("#dialog").dialog({
@@ -32,11 +36,10 @@ $(function() {
 	    }
   });
   socket.on('members', function (data){
-	  data.members.forEach(function(user){
-		  user = JSON.parse(user);
-		  
+	//  alert(JSON.stringify(data));
+	  data.forEach(function(user){
+		  var user = JSON.parse(user);
 		  if(user.codename !=  $("#codename").html()){
-
 			  $(".current-photo").html("<img class='cpimg' src='"+user.photourl+"'></img>");
 		  }
 		  else{

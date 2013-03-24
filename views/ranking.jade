@@ -23,13 +23,13 @@ block content
 							- if(i <= 8){
 								.img-photo
 									img.chat_photo(id=member.codename, src=member.photourl)
-								p=member.codename
+								p.chat-mate=member.codename
 								#r1.rate_widget
-									.ratings_chick(class=member.codename + '_1')
-									.ratings_chick(class=member.codename + '_2')
-									.ratings_chick(class=member.codename + '_3')
-									.ratings_chick(class=member.codename + '_4')
-									.ratings_chick(class=member.codename + '_5')
+									.ratings_chick(class='member_'+member.codename + '_1',val=1,codename=member.codename)
+									.ratings_chick(class='member_'+member.codename + '_2',val=2,codename=member.codename)
+									.ratings_chick(class='member_'+member.codename + '_3',val=3,codename=member.codename)
+									.ratings_chick(class='member_'+member.codename + '_4',val=4,codename=member.codename)
+									.ratings_chick(class='member_'+member.codename + '_5',val=5,codename=member.codename)
 							- }
 					.ranking-right
 						each member in members
@@ -39,14 +39,36 @@ block content
 									img.chat_photo(id=member.codename, src=member.photourl)
 								p=member.codename
 								#r1.rate_widget
-									.ratings_chick(class=member.codename + '_1')
-									.ratings_chick(class=member.codename + '_2')
-									.ratings_chick(class=member.codename + '_3')
-									.ratings_chick(class=member.codename + '_4')
-									.ratings_chick(class=member.codename + '_5')
+									.ratings_chick(class='member_'+member.codename + '_1')
+									.ratings_chick(class='member_'+member.codename + '_2')
+									.ratings_chick(class='member_'+member.codename + '_3')
+									.ratings_chick(class='member_'+member.codename + '_4')
+									.ratings_chick(class='member_'+member.codename + '_5')
 							- }
+				.submit-part
+					button#submit_rating(type='button')	
+				input#memberlist(hidden='hidden', type='text', value=JSON.stringify(members))
+				#dialog(hidden="hidden")
+					.ranking-result-form
+						img#chatpeak.peaks
+						.found-facebook dfsdfdsf
+						.found-twitter sdfgdfsdfgsfg
 		include footer
 		script
+			function getProfile(codename){
+				var members = JSON.parse($('#memberlist').val());
+				var profile = {};
+				if(members && members.length){
+					members.forEach(function(member){
+						if(member.codename == codename){
+							profile = member;
+							
+						}
+					});
+				}
+				return profile;
+				
+			}
 			$('.ratings_chick').hover(
 					function() {  
 						$(this).prevAll().andSelf().addClass('ratings_over');  
@@ -58,6 +80,53 @@ block content
 			);
 			$('.ratings_chick').click(
 					function(){
-						alert($(this).attr('class'));
+						if($(this).is('.ratings_chick')){
+							$(this).prevAll().andSelf().removeClass('ratings_chick');
+							$(this).prevAll().andSelf().addClass('ratings_chick-sel');
+						}
+						else{
+							$(this).prevAll().nextAll().andSelf().removeClass('ratings_chick-sel');
+							$(this).prevAll().nextAll().andSelf().addClass('ratings_chick');
+						}
+					}
+			);
+			$('#submit_rating').click(
+					function(){
+						$("#dialog").dialog({
+							closeOnEscape: true,
+							open: function(event, ui) { 
+								$(this).parent().children().children('.ui-dialog-titlebar-close').hide();
+							},
+							width:550,
+							height:400,
+							modal: true,
+							close: function( event, ui ) {
+								//window.location = '/logout';
+							}
+						});
+						var rating = $("[class*='ratings_chick-sel']").length;
+						var memberArr = new Array();
+						var lastmem = {};
+						var ctr=0;
+						$("[class*='ratings_chick-sel']").each(function(e){
+							ctr++;
+							if((Number(lastmem.val) < Number($(this).attr('val')))){
+								lastmem = {};
+								lastmem.val = $(this).attr('val');
+								lastmem.codename = $(this).attr('codename');
+							}
+							if(!lastmem.val){
+								lastmem = {};
+								lastmem.val = $(this).attr('val');
+								lastmem.codename = $(this).attr('codename');
+							}
+							
+							if(ctr >= rating && (memberArr.length == 0)){
+								memberArr.push(lastmem)
+							}
+							
+						});
+						var profile = getProfile(memberArr[0].codename);
+						$('#chatpeak').attr('src',profile.photourl);
 					}
 			);

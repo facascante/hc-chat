@@ -238,8 +238,21 @@ body.chat-page {
     width: 100%;
 }
 .gender-container .choose-gender-box {
-    background: url("/img/hc-theme/gender-box.png") no-repeat scroll 51.5% 35px transparent;
-    height: 400px;
+    background-attachment: inherit;
+    background-clip: border-box;
+    background-color: transparent;
+    background-image: url("/img/hc-theme/gender-box.png");
+    background-origin: padding-box;
+    background-position: 51.5% 32px;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+    border: 1px solid transparent;
+    display: block;
+    height: 396px;
+    left: 38%;
+    position: relative;
+    top: 15px;
+    width: 354px;
 }
 .gender-container .choose-gender-box input {
     color: white;
@@ -260,23 +273,27 @@ form {
     display: block;
     font-family: "Georgia";
     font-size: 26.47px;
-    height: 25px;
+    height: 24px;
+    left: -157px;
+    position: relative;
     text-align: left;
-    top: -20px;
-    width: 176px;
+    top: 0;
+    width: 175px;
 }
 .gender-container .choose-gender-box .male {
     background-attachment: inherit;
-    background-clip: inherit;
+    background-clip: border-box;
     background-color: transparent;
     background-image: url("/img/hc-theme/male-gender.png");
     background-origin: padding-box;
-    background-position: -128px 0;
+    background-position: -127px 0;
     background-repeat: no-repeat;
-    border: 0 solid #000000;
+    border: 0 solid;
+    display: block;
     height: 32%;
-    margin: 122px 0 0 42%;
-    width: 9%;
+    margin: 118px 0 0 15%;
+    position: relative;
+    width: 34%;
 }
 .gender-container .choose-gender-box .male .s {
     background-position: -6px 0;
@@ -289,31 +306,38 @@ form {
     background-origin: padding-box;
     background-position: -124px 0;
     background-repeat: no-repeat;
-    border: 0 solid #000000;
+    border: 0 solid;
+    display: block;
     height: 32%;
-    margin: 0 0 0 1%;
+    margin: -128px 0 0 52%;
+    position: relative;
     width: 122px;
 }
 .gender-container .choose-gender-box .username-box {
-    background-attachment: fixed;
-    background-clip: inherit;
+    background-attachment: inherit;
+    background-clip: padding-box;
     background-color: transparent;
     background-image: url("/img/hc-theme/username-box.png");
     background-origin: padding-box;
-    background-position: 55% -1%;
+    background-position: 50% 59%;
     background-repeat: no-repeat;
-    border: 0 solid #000000;
+    border: 0 solid;
+    display: block;
     height: 20%;
-    margin: 0;
-    width: 62%;
+    left: 31px;
+    margin: 2px;
+    position: relative;
+    width: 81%;
 }
 .gender-container .choose-gender-box #submit {
     background: none repeat scroll 0 0 transparent;
-    border: 0 solid #000000;
+    border: 0 solid;
+    display: block;
     float: right;
     height: 35px;
     margin: -29px 2px 3px 14px;
-    width: 61px;
+    position: relative;
+    width: 70px;
 }
 .homepage-container .login-container .sb-twitter {
     background-attachment: inherit;
@@ -403,8 +427,25 @@ footer a, footer p {
     width: 29px;
 }
 
+.ranking-container .ranking-selection-box .ranking-selection-list .ranking-left .rate_widget .ratings_chick-sel{
+  background: url("/img/hc-theme/chick-show.png") no-repeat scroll 0 -5px transparent;
+    float: left;
+    height: 29px;
+    padding: 3px;
+    width: 29px;
+}
+
 .ranking-container .ranking-selection-box .ranking-selection-list .ranking-right .rate_widget .ratings_chick{
   background: url("/img/hc-theme/chick-hide.png") no-repeat scroll 0 -5px transparent;
+    float: left;
+    height: 29px;
+    padding: 3px;
+    width: 29px;
+}
+
+
+.ranking-container .ranking-selection-box .ranking-selection-list .ranking-right .rate_widget .ratings_chick-sel{
+  background: url("/img/hc-theme/chick-show.png") no-repeat scroll 0 -5px transparent;
     float: left;
     height: 29px;
     padding: 3px;
@@ -436,23 +477,23 @@ footer a, footer p {
 }
 
 .ranking-container .ranking-selection-box .ranking-selection-list .ranking-left .chat_photo {  
-    border: 1px solid #CCCCCC;
+    border: 0 solid #CCCCCC;
+    border-radius: 10px 10px 10px 10px;
     float: left;
-    height: 60px;
+    height: 48px;
     left: 32%;
-    margin: 5px 0;
-    top: 2%;
-    width: 60px;
+    margin: 8px 7px;
+    width: 47px;
 }
 
 .ranking-container .ranking-selection-box .ranking-selection-list .ranking-right .chat_photo {  
-    border: 1px solid #CCCCCC;
+    border: 0 solid #CCCCCC;
+    border-radius: 10px 10px 10px 10px;
     float: left;
-    height: 60px;
+    height: 48px;
     left: 32%;
-    margin: 5px 0;
-    top: 2%;
-    width: 60px;
+    margin: 8px 7px;
+    width: 47px;
 }
 
 .ranking-container .ranking-selection-box .ranking-selection-list .ranking-left .rate_widget .ratings_vote {  
@@ -475,18 +516,19 @@ footer a, footer p {
     border: 0 solid #CCCCCC;
     height: 360px;
     margin: auto;
-    overflow-y: scroll;
+    overflow-y: auto;
     position: relative;
     top: 11%;
     width: 676px;
+    padding-top: 15px;
 }
 
 .ranking-container .ranking-selection-box .ranking-selection-list .ranking-left{  
     border: 0px solid #000000;
     float: left;
-    height: 580px;
+    height: auto;
     left: 0;
-    overflow: visible;
+    overflow-y: visible;
     position: relative;
     top: 2px;
     width: 49%;
@@ -495,22 +537,23 @@ footer a, footer p {
 .ranking-container .ranking-selection-box .ranking-selection-list .ranking-right{  
     border: 0px solid #000000;
     float: right;
-    height: 580px;
+    height: auto;
     left: 0;
     overflow: visible;
     position: relative;
     top: 2px;
     width: 49%;
 }
-h4{
-  border: 0px solid #000000;
+
+.ranking-container .ranking-selection-box .ranking-selection-list .ranking-left .chat-mate{
+  	border: 0 solid #000000;
+    color: #FFFFFF;
     float: left;
     font-family: times new roman;
-    margin: 5% 2px;
-    top: 0;
-    width: 70px;
-    text-wrap: normal;
+    font-size: 20px;
+    margin: 7% 5px;
     vertical-align: middle;
+    width: 70px;
 }
 
 .ranking-container {
@@ -550,7 +593,7 @@ h4{
     background-repeat: no-repeat;
     border: 0 solid #000000;
     height: 61px;
-    margin: 70px 0;
+    margin: 55px 0;
     width: 100%;
 }
 
@@ -572,3 +615,91 @@ body.ranking-page {
     background-repeat: no-repeat;
     background-size: 100% 110%;
 }
+.ranking-container .ranking-selection-box .ranking-selection-list .ranking-left .img-photo {
+	background: url("/img/hc-theme/ranking-photo-bg.png") no-repeat scroll -2px -2px transparent;
+    border: 0 solid #CCCCCC;
+    float: left;
+    height: 60px;
+    left: 32%;
+    margin: 5px 0;
+    top: 2%;
+    width: 60px;
+}
+
+.ranking-container .ranking-selection-box .ranking-selection-list .ranking-right .img-photo {
+	background: url("/img/hc-theme/ranking-photo-bg.png") no-repeat scroll -2px -2px transparent;
+    border: 0 solid #CCCCCC;
+    float: left;
+    height: 60px;
+    left: 32%;
+    margin: 5px 0;
+    top: 2%;
+    width: 60px;
+}
+
+.ranking-result-form {
+    background-attachment: inherit;
+    background-clip: border-box;
+    background-color: transparent;
+    background-image: url("/img/hc-theme/ranking-foundmatch-form.png");
+    background-origin: padding-box;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+    border: 0px solid;
+    display: block;
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+.ranking-result-form .found-facebook {
+    background-attachment: inherit;
+    background-clip: border-box;
+    background-color: transparent;
+    background-image: url("/img/hc-theme/found-facebook.png");
+    background-origin: padding-box;
+    background-position: 0 4px;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+    border: 1px solid;
+    display: block;
+    height: 11%;
+    left: 258px;
+    position: relative;
+    top: 167px;
+    width: 45%;
+}
+.ranking-result-form .found-twitter {
+    background-attachment: inherit;
+    background-clip: content-box;
+    background-color: transparent;
+    background-image: url("/img/hc-theme/found-twitter.png");
+    background-origin: padding-box;
+    background-position: 0 4px;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+    border: 1px solid;
+    display: block;
+    height: 11%;
+    left: 258px;
+    position: relative;
+    top: 175px;
+    width: 45%;
+}
+.ranking-result-form .peaks {
+    height:200px;
+    width:100px;
+}
+.ui-widget-content.ui-dialog {
+	background: url("http://64.19.142.13/code.jquery.com/ui/1.10.2/themes/smoothness/images/ui-bg_flat_75_ffffff_40x100.png") no-repeat scroll 50% 50% transparent;
+    background-color: transparent;
+    border: 0 solid;
+    padding: 0
+}
+.ui-dialog .ui-dialog-titlebar {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    padding: 0;
+    position: relative;
+}
+

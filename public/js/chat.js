@@ -18,7 +18,10 @@ socket.on('switch_room', function (data){
 });
 socket.on('rank_room', function (data){
 	var data = JSON.stringify(data);
-	window.location = '/ranking';
+	$.post( '/ranking', {data:data} ).done(function(data){
+		window.location = '/rankings';
+	});
+	
 	
 });
 

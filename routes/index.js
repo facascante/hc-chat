@@ -3,7 +3,6 @@ var model = require("../client");
 /*
  * GET home page.
  */
-
 exports.ranking = function(req, res){
 	console.log(req.cookies.data);
 	  res.render('ranking',{user:req.user});
@@ -19,10 +18,11 @@ exports.chat = function(req,res){
    req.user.gender = req.query['gender-m'] || req.query['gender-f'] || req.user.gender;
    console.log(req.user.gender);
    if((req.query['gender-m'] || req.query['gender-f']) && req.query.username){
-	   req.user.codename = req.query.username;
+	   req.user.codename = req.query.username || req.user.codename;
 	   res.render('chat',{user:req.user});
    }
    else{
+	   req.user.codename = req.query.username || req.user.codename;
 	   res.render('chat',{user:req.user});
    }
    

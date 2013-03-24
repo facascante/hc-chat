@@ -66,9 +66,38 @@ app.get('/authfb', passport.authenticate('facebook'));
 app.get('/authtw', passport.authenticate('twitter'));
 app.get('/authfb/callback', passport.authenticate('facebook', {successRedirect: '/option',failureRedirect: '/'}));
 app.get('/authtw/callback', passport.authenticate('twitter', {successRedirect: '/option',failureRedirect: '/'}));
-app.get('/ranking',restrict,function(req, res){
-	var members = new Array();
-	res.render('ranking',{members:members});
+app.post('/ranking',restrict,function(req, res){
+	if(req.body.data){
+		var members = req.body.data;
+		//res.render('ranking',{members:members,user:req.user});
+		res.cookie('data',members);
+		res.json(200,true);
+	}
+	else{
+		res.json(400,false);
+	}
+	
+
+});
+app.get('/rankings',restrict,function(req, res){
+	if(req.cookies.data){
+		var members = JSON.parse(req.cookies.data);
+		console.log(members);
+		
+		var visitors = new Array();
+		members.forEach(function(member){
+			member.members.forEach(function(user){
+				if(user.gender != req.user.gender){
+					visitors.push(user);
+				}
+			});
+		});
+		res.render('ranking',{members:visitors,user:req.user});
+	}
+	else{
+		res.redirect('/');
+	}
+	
 
 });
 app.get('/logout', function(req, res){

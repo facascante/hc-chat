@@ -89,7 +89,7 @@ module.exports = {
     				var members = room_visitor.members;
     				members.forEach(function(visitor){
     					visitor = JSON.parse(visitor);
-    					if(visitor.codename == user.codename){
+    					if(visitor.username == user.username){
     						flag = true;
     						cb(null,room_visitor);
     					}
@@ -257,7 +257,7 @@ module.exports = {
     				rooms.push(room);
     			}
     			console.log("===========================================");
-    			console.log(JSON.stringify(rooms));
+    		//	console.log(JSON.stringify(rooms));
     			cb(null,rooms)
     		}],
     		cleanRoom : ['switchPartner',function(cb,result){

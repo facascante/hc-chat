@@ -17,35 +17,34 @@ block content
 			.ranking-selection-box
 				.ranking-selection-list
 					.ranking-left
-					- var members = members, i =0, j =0
-					each member in members
-						- i++
-						- if(i <= 8){
-							.img-photo
-								img#codename.chat_photo(img='')
-							p codename
-							#r1.rate_widget
-								.codename_1.ratings_chick
-								.codename_2.ratings_chick
-								.codename_3.ratings_chick
-								.codename_4.ratings_chick
-								.codename_5.ratings_chick
-						- }
+						- var i =0, j =0;
+						each member in members
+							- i++
+							- if(i <= 8){
+								.img-photo
+									img.chat_photo(id=member.codename, src=member.photourl)
+								p=member.codename
+								#r1.rate_widget
+									.ratings_chick(class=member.codename + '_1')
+									.ratings_chick(class=member.codename + '_2')
+									.ratings_chick(class=member.codename + '_3')
+									.ratings_chick(class=member.codename + '_4')
+									.ratings_chick(class=member.codename + '_5')
+							- }
 					.ranking-right
-					each member i
-					n members
-						- j++
-						- if(j > 8){
-							.img-photo
-								img#codename.chat_photo(img='')
-							p codename
-							#r1.rate_widget
-								.codename_1.ratings_chick
-								.codename_2.ratings_chick
-								.codename_3.ratings_chick
-								.codename_4.ratings_chick
-								.codename_5.ratings_chick
-						- }
+						each member in members
+							- j++
+							- if(j > 8){
+								.img-photo
+									img.chat_photo(id=member.codename, src=member.photourl)
+								p=member.codename
+								#r1.rate_widget
+									.ratings_chick(class=member.codename + '_1')
+									.ratings_chick(class=member.codename + '_2')
+									.ratings_chick(class=member.codename + '_3')
+									.ratings_chick(class=member.codename + '_4')
+									.ratings_chick(class=member.codename + '_5')
+							- }
 		include footer
 		script
 			$('.ratings_chick').hover(

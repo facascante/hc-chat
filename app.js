@@ -22,7 +22,7 @@ require('./strategy');
 var app = exports.app = express();
 
 app.configure(function(){
-  app.set('port', process.env.PORT || 3000);
+  app.set('port', process.env.PORT || 80);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.use(express.favicon());
@@ -67,7 +67,7 @@ app.get('/authtw', passport.authenticate('twitter'));
 app.get('/authfb/callback', passport.authenticate('facebook', {successRedirect: '/option',failureRedirect: '/'}));
 app.get('/authtw/callback', passport.authenticate('twitter', {successRedirect: '/option',failureRedirect: '/'}));
 app.get('/ranking',restrict,function(req, res){
-
+	var members = new Array();
 	res.render('ranking',{members:members});
 
 });

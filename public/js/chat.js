@@ -1,5 +1,5 @@
 $(function() {
-
+	
   var socket = io.connect();
 
   var room_members;
@@ -15,6 +15,11 @@ $(function() {
 
 socket.on('switch_room', function (data){
 	window.location = '/chat';
+});
+socket.on('rank_room', function (data){
+	var data = JSON.stringify(data);
+	window.location = '/ranking';
+	
 });
 
   socket.on('start_chat', function (data){
@@ -143,7 +148,10 @@ socket.on('switch_room', function (data){
       return false;
     }
   });
-
+  $("#logout").click(function(){
+	  socket.emit('log_out',true);
+		window.location = '/logout';
+  });
 
 });
 
@@ -179,3 +187,5 @@ function set_by_offset() {
 	});
 	$('#countdown_dashboard').startCountDown();
 }
+
+

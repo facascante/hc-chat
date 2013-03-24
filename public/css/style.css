@@ -365,25 +365,26 @@ footer a, footer p {
     text-decoration: none;
 }
 .cpimg {
-border-radius: 58px 58px 58px 58px;
-height: 166px;
-margin: 7% 32% 1% 6%;
-width: 168px;
+	border-radius: 58px 58px 58px 58px;
+	height: 168px;
+	margin: 6.5% 32% 1% 6%;
+	width: 168px;
 }
 
 
 .npimg {
-    border-radius: 38px 38px 40px 41px;
-    height: 120px;
-    margin: 14% 9%;
-    width: 122px;
+    border-radius: 47px 47px 46px 46px;
+    height: 128px;
+    margin: 11.9% 7.7%;
+    width: 127px;
 }
 
+
 .ppimg {
-    border-radius: 36px 34px 39px 41px;
-    height: 120px;
-    margin: 15% 9%;
-    width: 123px;
+    border-radius: 47px 45px 46px 45px;
+    height: 129.9px;
+    margin: 11.2% 7.9%;
+    width: 128px;
 }
 
 .pcn {
@@ -471,13 +472,13 @@ width: 168px;
 }
 
 .ranking-container .ranking-selection-box .ranking-selection-list {  
-    border: 0px solid #CCCCCC;
+    border: 0 solid #CCCCCC;
     height: 360px;
-    left: 26%;
+    margin: auto;
     overflow-y: scroll;
     position: relative;
     top: 11%;
-    width: 50%;
+    width: 676px;
 }
 
 .ranking-container .ranking-selection-box .ranking-selection-list .ranking-left{  
@@ -521,8 +522,9 @@ h4{
 
 .ranking-container .ranking-selection-box {
   background: url("/img/hc-theme/score-sheet.png") no-repeat scroll 51.5% -7px transparent;
-  background-size: -moz-calc();
-  height: 500px;  
+  height: 500px;
+  margin: auto;
+  width: 710px;  
 }
 
 .ranking-container .ranking-selection-box .good{
@@ -540,26 +542,25 @@ h4{
 }
 
 .ranking-container .ranking-selection-box .submit-part {
-  background-attachment: fixed;
+    background-attachment: fixed;
     background-clip: inherit;
     background-color: transparent;
     background-image: none;
     background-origin: padding-box;
-    background-position: 55% -1%;
     background-repeat: no-repeat;
-    border: 0px solid #000000;
-    height: 13%;
-    margin: 5% 0;
+    border: 0 solid #000000;
+    height: 61px;
+    margin: 70px 0;
     width: 100%;
 }
 
 .ranking-container .ranking-selection-box .submit-part #submit_rating{
-  background: url("/img/hc-theme/button-rate.png") no-repeat scroll 0 0 transparent;
+    background: url("/img/hc-theme/button-rate.png") no-repeat scroll 0 0 transparent;
     border: 0 solid #000000;
-    height: 80%;
-    margin: 5px 43%;
-    width: 16%;
     cursor: pointer;
+    height: 80%;
+    margin: 5px 35%;
+    width: 214px;
 }
 body.ranking-page {
     margin:0 0 0 0;

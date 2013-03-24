@@ -4,6 +4,10 @@ var model = require("../client");
  * GET home page.
  */
 
+exports.ranking = function(req, res){
+	console.log(req.cookies.data);
+	  res.render('ranking',{user:req.user});
+};
 exports.index = function(req, res){
   res.render('login');
 };

@@ -272,6 +272,9 @@ module.exports = {
     						}
     					})});
     				}
+    				else{
+    					cb(null,true);
+    				}
     			});
     		}],
     		saveToRedis : ['cleanRoom',function(cb,result){
@@ -318,5 +321,21 @@ module.exports = {
             room.visitor.push(visitor);    
         }
         client.sadd('hc:rooms',JSON.stringify(room));
+    },
+    cleanRooms : function(client,fn){
+    	client.keys('hc:*', function(err, keys) {
+			if(keys){
+				var key_ctr = 0;
+				keys.forEach(function(key){client.del(key,function(err,result){
+					key_ctr++;
+					if(key_ctr >= keys.length){
+						fn(null,true);
+					}
+				})});
+			}
+			else{
+				fn(null,true);
+			}
+		});
     }
 }

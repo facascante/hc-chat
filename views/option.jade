@@ -19,9 +19,9 @@ block content
 		include footer
 		script
 			$('#but-male').click(function(ev) {
-				$('#but-male').not(this).css('background-position', '-128px 0').removeClass('s');
+				$('#but-male').not(this).css('background-position', '-127px 0').removeClass('s');
 				if(!$(this).is('.s')){
-					$(this).css('background-position', '-6px 0').addClass('s');
+					$(this).css('background-position', '-5px 0').addClass('s');
 					$('#gender-m').attr("checked", true);
 					$('#gender-f').attr("checked", false);
 					$('#but-female').css('background-position', '-124px 0').removeClass('s');

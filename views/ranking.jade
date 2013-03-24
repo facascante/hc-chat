@@ -5,7 +5,14 @@ block content
 		.header-wrapper
 			.header
 			.user-header
-				h2 Hi
+				h2 
+					table
+						tr
+							td Hi
+							td 
+								p#codename.pcn=user.codename
+							td 
+				a.signout(href="/logout")
 		.ranking-container
 			.ranking-selection-box
 				.ranking-selection-list
@@ -14,7 +21,8 @@ block content
 					each member in members
 						- i++
 						- if(i <= 8){
-							img#codename.chat_photo(img='')
+							.img-photo
+								img#codename.chat_photo(img='')
 							p codename
 							#r1.rate_widget
 								.codename_1.ratings_chick
@@ -24,10 +32,12 @@ block content
 								.codename_5.ratings_chick
 						- }
 					.ranking-right
-					each member in members
+					each member i
+					n members
 						- j++
 						- if(j > 8){
-							img#codename.chat_photo(img='')
+							.img-photo
+								img#codename.chat_photo(img='')
 							p codename
 							#r1.rate_widget
 								.codename_1.ratings_chick

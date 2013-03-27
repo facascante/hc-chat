@@ -115,8 +115,6 @@ setInterval(function(){
 						client.del('hc:room:'+rooms[i].no+':visitor');
 						console.log('rank room called');
 					}
-					
-					
 				}
 				else{
 					for(var j=0; j < rooms.length; j++){
@@ -133,5 +131,5 @@ setInterval(function(){
 		console.log("======================================");
 		
 	},60000);
-
-},60000);
+	rotate_ctr = 0;
+},120000);

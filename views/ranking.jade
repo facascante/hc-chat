@@ -51,8 +51,11 @@ block content
 				#dialog(hidden="hidden")
 					.ranking-result-form
 						img#chatpeak.peaks
-						.found-facebook dfsdfdsf
-						.found-twitter sdfgdfsdfgsfg
+						p#chatname
+						a#foundfb
+							#chatfbname.found-facebook
+						a#foundtw
+							#chattwname.found-twitter
 		include footer
 		script
 			function getProfile(codename){
@@ -127,6 +130,13 @@ block content
 							
 						});
 						var profile = getProfile(memberArr[0].codename);
+						var fblink = "https://facebook.com/" + profile.username
+						var twlink = "https://twitter.com/" + profile.username
 						$('#chatpeak').attr('src',profile.photourl);
+						$('#chatname').text(profile.codename);
+						$('#chatfbname').text("Add "+profile.codename+" on Facebook");
+						$('#foundfb').attr('href',fblink);
+						$('#chattwname').text("Add "+profile.codename+" on Twitter");
+						$('#foundtw').attr('href',twlink);
 					}
 			);

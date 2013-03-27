@@ -105,10 +105,10 @@ socket.on('rank_room', function (data){
 
   socket.on('new msg', function(data) {
 	  if(data.gender == "male"){
-		  $(" .messagewindow ").append("<img class='leftp' src='"+data.photourl+"'></img><p class='me-chat'>" + data.msg + "</p>");
+		  $(" .messagewindow ").append("<img class='leftp' src='"+data.photourl+"'></img><p class='me-chat'><strong>"+ data.codename + ":</strong> <em>" + data.msg + "</em></p>");
 	  }
 	  else{
-		  $(" .messagewindow ").append("<img class='rightp' src='"+data.photourl+"'></img><p class='you-chat'>" + data.msg + "</p>");
+		  $(" .messagewindow ").append("<img class='rightp' src='"+data.photourl+"'></img><p class='you-chat'><strong>"+ data.codename + ":</strong> <em>" + data.msg + "</em></p>");
 	  }
 	  $(".messagewindow").prop({ scrollTop: $(".messagewindow").prop("scrollHeight") });
   });

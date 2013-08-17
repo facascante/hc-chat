@@ -10,11 +10,47 @@ $(function() {
   });
 
   socket.on('connect', function (){
-    console.info('successfully established a working connection');
+	  console.info('successfully established a working connection');
   });
-
+  socket.on('game_left', function (game_left){
+	    
+	    console.info(game_left);
+		game_left = Number(game_left);
+		console.info(game_left);
+		var game_min = Math.floor(game_left/60000);
+		var game_sec = Math.floor((game_left % 60000)/1000);
+		if(!(game_min+'')[1]){
+	  		$("#min_1").html(0);
+	  		$("#min_2").html((game_min+'')[0]);
+		}
+  		else {
+		    $("#min_1").html((game_min+'')[0]);
+		    $("#min_2").html((game_min+'')[1]);
+  		}
+	    $("#sec_1").html((game_sec+'')[0]);
+	    $("#sec_2").html((game_sec+'')[1]);
+	    set_by_offset(game_min,game_sec);
+  });
+  socket.on('rotate_left', function (rotate_left){
+	    console.info(rotate_left);
+	    rotate_left = Number(rotate_left);
+		console.info(rotate_left);
+		var game_min = Math.floor(rotate_left/60000);
+		var game_sec = Math.floor((rotate_left % 60000)/1000);
+		if(!(game_min+'')[1]){
+	  		$("#min_11").html(0);
+	  		$("#min_12").html((game_min+'')[0]);
+		}
+		else {
+		    $("#min_11").html((game_min+'')[0]);
+		    $("#min_12").html((game_min+'')[1]);
+		}
+	    $("#sec_21").html((game_sec+'')[0]);
+	    $("#sec_22").html((game_sec+'')[1]);
+	    set_by_offset1(game_min,game_sec);
+  });
 socket.on('switch_room', function (data){
-	window.location = '/chat';
+	window.location = '/chat?rotate_time='+data;
 });
 socket.on('rank_room', function (data){
 	var data = JSON.stringify(data);
@@ -49,6 +85,7 @@ socket.on('rank_room', function (data){
 		  var user = JSON.parse(user);
 		  if(user.codename !=  $("#codename").html()){
 			  $(".current-photo").html("<img class='cpimg' src='"+user.photourl+"'></img>");
+			  $("#chat-code").html(user.codename);
 		  }
 		  else{
 			  me = user;
@@ -105,10 +142,10 @@ socket.on('rank_room', function (data){
 
   socket.on('new msg', function(data) {
 	  if(data.gender == "male"){
-		  $(" .messagewindow ").append("<img class='leftp' src='"+data.photourl+"'></img><p class='me-chat'><strong>"+ data.codename + ":</strong> <em>" + data.msg + "</em></p>");
+		  $(" .messagewindow ").append("<img class='leftp'></img><img class='imgleft' src='"+data.photourl+"'></img><p class='me-chat'><strong>"+ data.codename + ":</strong> <em>" + data.msg + "</em></p>");
 	  }
 	  else{
-		  $(" .messagewindow ").append("<img class='rightp' src='"+data.photourl+"'></img><p class='you-chat'><strong>"+ data.codename + ":</strong> <em>" + data.msg + "</em></p>");
+		  $(" .messagewindow ").append("<img class='rightp'></img><img class='imgright' src='"+data.photourl+"'></img><p class='you-chat'><strong>"+ data.codename + ":</strong> <em>" + data.msg + "</em></p>");
 	  }
 	  $(".messagewindow").prop({ scrollTop: $(".messagewindow").prop("scrollHeight") });
   });
@@ -129,10 +166,11 @@ socket.on('rank_room', function (data){
 	        });
 	      }
 
-	      $(this).val('');
+	      $("#message").val('');
 
 	      return false;
 	    }
+	    
   });
   $("#message").keypress(function(e) {
     var inputText = $(this).val().trim();
@@ -176,7 +214,8 @@ function set_by_date() {
 }
 
 // Set by date/time offset
-function set_by_offset() {
+function set_by_offset(min,sec) {
+	/*** room countdown ***/
 	$('#countdown_dashboard').stopCountDown();
 	$('#countdown_dashboard').setCountDown({
 		targetOffset: {
@@ -184,11 +223,26 @@ function set_by_offset() {
 			'month': 	0,
 			'year': 	0,
 			'hour': 	0,
-			'min': 		20,
-			'sec': 		0
+			'min': 		Number(min),
+			'sec': 		Number(sec)
 		}
 	});
 	$('#countdown_dashboard').startCountDown();
 }
 
-
+//Set by date/time offset
+function set_by_offset1(min,sec) {
+	/*** room countdown ***/
+	$('#left-time').stopCountDown();
+	$('#left-time').setCountDown({
+		targetOffset: {
+			'day': 		0,
+			'month': 	0,
+			'year': 	0,
+			'hour': 	0,
+			'min': 		Number(min),
+			'sec': 		Number(sec)
+		}
+	});
+	$('#left-time').startCountDown();
+}

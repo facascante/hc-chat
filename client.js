@@ -4,7 +4,7 @@ module.exports = {
     
     roomList : function(client,fn){
         client.smembers('hc:rooms',function(err, rooms){
-            console.log("Getting Rooms: " + rooms.length);
+            
             if(err){
                 fn(err);
             }
@@ -14,7 +14,6 @@ module.exports = {
         });  
     },
     roomVisitors : function(client,room,fn){
-    	console.log('hc:room:'+room+':visitor');
     	client.smembers('hc:room:'+room+':visitor',function(err, visitors){
             if(err){
                 fn(err);
@@ -41,7 +40,6 @@ module.exports = {
                         	ar.push({room:room_map,members:visitors});
                         }
                         if(room_map >= rooms.length){
-                        	console.log(ar);
                         	fn(null,ar);
                         }
                         room_map++;
@@ -56,11 +54,9 @@ module.exports = {
     	
     	async.auto({
     		GetRooms : function(cb){
-    			console.log('GetRooms');
     			client.sort('hc:rooms',cb);
     		},
     		GetVisitors : ['GetRooms', function(cb,result){
-    			console.log('GetVisitors');
     			var rooms = result.GetRooms;
     			var room_visitors = new Array();
     			if(rooms && rooms.length){
@@ -82,7 +78,6 @@ module.exports = {
     			}
     		}],
     		CheckMe : ['GetVisitors', function(cb,result){
-    			console.log('CheckMe');
     			var room_visitors = result.GetVisitors;
     			var flag = false;
     			room_visitors.forEach(function(room_visitor){
@@ -102,7 +97,6 @@ module.exports = {
     			
     		}],
     		AddMe : ['CheckMe', function(cb,result){
-    			console.log('AddMe');
     			var me = result.CheckMe;
     			if(me == -1){
     				var room_visitors = result.GetVisitors;
@@ -137,7 +131,6 @@ module.exports = {
     			
     		}],
     		RecordToRedis : ['AddMe', function(cb,result){
-    			console.log('RecordToRedis');
     			var isExist = result.CheckMe;
     			if(isExist == -1){
     				var room_visitor = result.AddMe;
@@ -183,21 +176,18 @@ module.exports = {
     	},function(err,result){
     		if(err) console.log(err);
     		else {
-    			console.log(result);
+
     		}
     		fn(err,result);
     	});
     	
     },
     switchVisitorRoom : function(client,fn){
-    	console.log('switch');
     	async.auto({
     		GetRooms : function(cb){
-    			console.log('GetRooms');
     			client.sort('hc:rooms',cb);
     		},
     		GetVisitors : ['GetRooms', function(cb,result){
-    			console.log('GetVisitors');
     			var rooms = result.GetRooms;
     			var room_visitors = new Array();
     			if(rooms && rooms.length){
@@ -219,7 +209,6 @@ module.exports = {
     			}
     		}],
     		separateGenders : ['GetVisitors',function(cb,result){
-    			console.log('separateGenders');
     			var rooms = result.GetVisitors;
     			var males = new Array();
     			var females = new Array();
@@ -242,12 +231,10 @@ module.exports = {
     			cb(null,{males:males,females:females})
     		}],
     		switchPartner : ['separateGenders',function(cb,result){
-    			console.log('switchPartner');
     			var males = result.separateGenders.males;
     			var females = result.separateGenders.females;
     			var counter = (males.length < females.length) ? males.length : females.length;
     			var rooms = new Array();
-    			console.log("===========================================");
     			for(var i=0; i< counter; i++){
     				var room = {};
     				room.no = i + 1;
@@ -256,12 +243,9 @@ module.exports = {
     				room.members.push(females[counter - i - 1]);
     				rooms.push(room);
     			}
-    			console.log("===========================================");
-    		//	console.log(JSON.stringify(rooms));
     			cb(null,rooms)
     		}],
     		cleanRoom : ['switchPartner',function(cb,result){
-    			console.log('cleanRoom');
     			client.keys('hc:*', function(err, keys) {
     				if(keys){
     					var key_ctr = 0;
@@ -278,7 +262,6 @@ module.exports = {
     			});
     		}],
     		saveToRedis : ['cleanRoom',function(cb,result){
-    			console.log('saveToRedis');
     			var rooms = result.switchPartner;
     			if(rooms && rooms.length){
     				var room_ctr = 0;
@@ -299,17 +282,14 @@ module.exports = {
     		}]
     	},function(err,result){
     		if(err){
-    			console.log(err);
     			fn(err);
     		}
     		else{
-    			console.log(result);
     			fn(null,result);
     		}
     	});
     },
     addVisitor : function(client,room,visitor){
-        console.log("Adding user");
         var isUserExist = false;
         room.visitor.forEach(function(user){
             if(user.username == visitor.username){

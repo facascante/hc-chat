@@ -3,10 +3,11 @@ body.home-page {
     background-attachment: fixed;
     background-clip: border-box;
     background-color: transparent;
-    background-image: url("/img/hc-theme/index-bg.png");
+    background-image: url("/img/hc-theme/background-retina_wood.png");
     background-origin: padding-box;
     background-repeat: no-repeat;
-    background-size: 100% 110%;
+    background-size: 100% 100%;
+    position: inherit;
     margin: 0;
 }
 body.gender-page {
@@ -26,8 +27,10 @@ body.chat-page {
     background-image: url("/img/hc-theme/chat-bg.png");
     background-origin: padding-box;
     background-repeat: no-repeat;
-    background-size: 100% 110%;
+    background-size: 100% 100%;
     margin: 0;
+    position: inherit;
+    
 }
 .header-wrapper {
     background: url("/img/hc-theme/header-line.png") repeat-x scroll 0 -30px / contain transparent;
@@ -35,18 +38,16 @@ body.chat-page {
     width: 100%;
 }
 .header-wrapper .header {
-    background-attachment: inherit;
-    background-clip: border-box;
-    background-color: transparent;
     background-image: url("/img/hc-theme/logo.png");
     background-origin: padding-box;
-    background-position: 55% -12px;
+    background-position: 53% -12px;
     background-repeat: no-repeat;
     background-size: contain;
     height: 150px;
 }
 .header-wrapper .user-header {
-    background-attachment: inherit;
+    background-attachment: fixed;
+    
     background-clip: border-box;
     background-color: transparent;
     background-image: url("/img/hc-theme/bannerline.png");
@@ -65,31 +66,44 @@ body.chat-page {
 .chatwindow {
     height: 332px;
     position: relative;
+    left: -308px;
+    margin: 0;
+    width:100%;
 }
 .messagewindow {
-    bottom: 1px;
+    bottom: 12px;
     overflow: auto;
-    top: 98px;
+    top: 86px;
     font-family: georgia;
 }
 .messagewindow {
     border: 0 solid white;
-    left: 13%;
+    left: 55%;
     position: absolute;
-    right: 13%;
+    right: 0%;
 }
 .messagewindow img.leftp {
     background-color: transparent;
-    height: 59px;
-    padding: 15px 0 0 29px;
+    background-image: url("/img/hc-theme/ranking-photo-bg.png");
+    background-repeat: no-repeat;
+    border-radius: 8px 8px 8px 8px;
+    height: 63px;
+    margin: -7px -8px -4px 0;
     position: absolute;
     text-align: left;
-    width: 65px;
+    width: 61px;
 }
 
 .messagewindow img.rightp {
+    background-color: transparent;
+    background-image: url("/img/hc-theme/ranking-photo-bg.png");
+    background-position: 430px center;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+    border-radius: 8px 8px 8px 8px;
     height: 59px;
-    padding: 16px 0 0 463px;
+    margin: -5px 6px 0px 53px;
+    padding: 11px 0 0 429px;
     position: absolute;
     text-align: left;
     width: 65px;
@@ -100,9 +114,8 @@ body.chat-page {
     background-image: url("/img/hc-theme/cloud-blue.png");
     background-position: -6px -3px;
     background-repeat: no-repeat;
-    
-    height: 55px;
-    margin: 12px 0 -4px 99px;
+    height: 64px;
+    margin: -50px 0 0 76px;
     padding: 4px 0 4px 18px;
     position: relative;
     text-align: left;
@@ -113,9 +126,8 @@ body.chat-page {
     background-image: url("/img/hc-theme/cloud-pink.png");
     background-position: 5px -3px;
     background-repeat: no-repeat;
-    
-    height: 55px;
-    margin: 12px 0 0 161px;
+    height: 64px;
+    margin: -54px 0 0 177px;
     padding: 6px 0 4px 20px;
     position: relative;
     text-align: left;
@@ -124,42 +136,57 @@ body.chat-page {
 
 .header-wrapper .user-header .signout {
     background: url("/img/hc-theme/out.png") no-repeat scroll 41% 6px transparent;
-    
     float: right;
     height: 57px;
-    margin: -44px 4px 3px 7px;
+    position: absolute;
+    margin: 0px 4px 3px -14px;
     width: 36px;
 }
 .chat-container .current-photo {
-    background: url("/img/hc-theme/photo-frame-big.png") no-repeat scroll 0 0 / contain transparent;
+    background: url("/img/hc-theme/photo-frame-big.png") no-repeat     scroll 0 0 / contain transparent;
     height: 193px;
-    left: 44%;
-    margin: -39px 0 0;
+    left: 43%;
+    margin: -31px 0 0;
     position: relative;
     width: 198px;
     z-index: 999;
 }
 .chat-container .next-photo {
-    background: url("/img/hc-theme/frame-right.png") no-repeat scroll 0 0 / contain transparent;
+    background: url("/img/hc-theme/frame-right.png") no-repeat     scroll 0 0 / contain transparent;
     border: 0 solid white;
     display: block;
     float: right;
     height: 205px;
-    margin: -139px 0 0;
-    position: fixed;
+    margin: -64px 0 0;
+    position: relative;
     right: 0;
-    top: 271px;
+    top: -23px;
     width: 218px;
+    z-index: 299;
 }
+    .chat-container .next-photo-noframe{
+	background: url("/img/hc-theme/QuestionMark.png") no-repeat     scroll 0 0 / contain transparent;
+    border: 0 solid white;
+    border-radius: 35px 35px 35px 35px;
+    display: block;
+    float: left;
+    height: 92px;
+    margin: -53px 37px;
+    position: relative;
+    top: 24px;
+    width: 101px;
+    z-index: 299;
+}
+	
 .chat-container .previous-photo {
-    background: url("/img/hc-theme/frame-left.png") no-repeat scroll 0 0 / contain transparent;
+    background: url("/img/hc-theme/frame-left.png") no-repeat 	    scroll 0 0 / contain transparent;
     border: 0 solid white;
     display: block;
     float: left;
     height: 193px;
-    margin: -107px 0 0;
-    position: fixed;
-    top: 239px;
+    margin: -24px 0 0;
+    position: relative;
+    top: -58px;
     width: 216px;
 }
 .chat-container .chat-view {
@@ -168,14 +195,14 @@ body.chat-page {
     background-color: transparent;
     background-image: url("/img/hc-theme/view-chat-box.png");
     background-origin: content-box;
-    background-position: 50% 2px;
+    background-position: 56% -8px;
     background-repeat: no-repeat;
-    background-size: 80% 100%;
+    background-size: 47% 100%;
     height: 340px;
-    left: 336px;
-    margin: -84px 0 15px;
+    left: 100px;
+    margin: -84px -152px 5px -131px;
     position: relative;
-    width: 717px;
+    width: 100%;
 }
 .chat-container .chat-text {
     background-attachment: inherit;
@@ -183,47 +210,53 @@ body.chat-page {
     background-color: transparent;
     background-image: url("/img/hc-theme/chat-text.png");
     background-origin: content-box;
-    background-position: 50% center;
+    background-position: 55% 0;
     background-repeat: no-repeat;
-    background-size: 79% 100%;
+    background-size: 47% 100%;
     height: 105px;
-    left: 336px;
-    margin: -17px 0 -12px 0;
+    left: 30px;
+    margin: -14px -152px 5px -54px;
     position: relative;
-    width: 717px;
+    width: 100%;
 }
-.chat-container .chat-text #message {
+.chat-container .chat-text .message-box {
+    padding: 2px 0px 0 0%;
+}
+.chat-container .chat-text .message-box #message {
+    padding: 2px 0px 0 0%;
+	margin: 1px 1px 0px 539px;
     background-color: transparent;
-    color: #535B6A;
+    color: #3A2D27;
+    display: block;
     font-family: "Georgia";
-    font-size: 20px;
-    font-style: italic;
-    height: 38px;
-    left: 16%;
-    margin: auto;
-    position: absolute;
-    top: 27%;
-    width: 356px;
+    font-size: 26.2px;
+    height: 34px;
+    position: relative;
+    right: 121px;
+    text-align: left;
+    top: 30px;
+    width: 28%;
+    
 }
 .chat-container .chat-text #reply {
     background-color: transparent;
     background-image: url("/img/hc-theme/button-reply.png");
-    background-size: 100% 101%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
     border: 0 solid #000000;
     color: #3A2D27;
     display: block;
     font-family: "Georgia";
     font-size: 20px;
     height: 59px;
-    left: 200px;
+    right: -240px;
     margin: auto;
     position: relative;
-    top: 22px;
-    width: 98px;
+    top: -19px;
+    width: 109px;
 }
 .header-wrapper .user-header h2 {
     background-color: transparent;
-    
     color: white;
     display: block;
     font-family: "Georgia";
@@ -233,28 +266,43 @@ body.chat-page {
     padding-left: 12px;
     text-align: left;
     width: 182px;
+    float: left;
 }
 .homepage-container {
     height: 100%;
     overflow: hidden;
-    position: relative;
+    position: inherit;
     width: 100%;
 }
+
+.homepage-container .login-bg {
+    background-attachment: inherit;
+    background-clip: padding-box;
+    background-color: transparent;
+    background-image: url("/img/hc-theme/index-bg.png");
+    background-origin: content-box;
+    background-position: 10px 1px;
+    background-repeat: no-repeat;
+    background-size: 58% 95%;
+    height: 281px;
+    margin: -285px 0 85px 8%;
+    width: 100%;
+}
+
 .homepage-container .login-container {
     background-attachment: inherit;
-    background-clip: border-box;
+    background-clip: padding-box;
     background-color: transparent;
     background-image: url("/img/hc-theme/signin-box.png");
-    background-origin: padding-box;
-    background-position: -18% -145px;
+    background-origin: content-box;
+    background-position: 2px -145px;
     background-repeat: no-repeat;
-    background-size: auto auto;
-    display: block;
+    background-size: 31% 160%;
     height: 322px;
-    left: 62%;
+    margin: 0 -501px 0 0;
     position: relative;
-    top: 1px;
-    width: 373px;
+    right: -66%;
+    width: 100%;
 }
 .gender-container {
     height: 100%;
@@ -263,7 +311,7 @@ body.chat-page {
     width: 100%;
 }
 .gender-container .choose-gender-box {
-    background-attachment: inherit;
+   background-attachment: inherit;
     background-clip: border-box;
     background-color: transparent;
     background-image: url("/img/hc-theme/gender-box.png");
@@ -338,6 +386,7 @@ form {
     position: relative;
     width: 122px;
 }
+
 .gender-container .choose-gender-box .username-box {
     background-attachment: inherit;
     background-clip: padding-box;
@@ -370,16 +419,16 @@ form {
     background-color: transparent;
     background-image: url("/img/hc-theme/tw-button.png");
     background-origin: padding-box;
-    background-position: 100% -2px;
+    background-position: 7.2% 13%;
     background-repeat: no-repeat;
-    background-size: auto auto;
+    background-size: 21% 123%;
     display: block;
     height: 42px;
-    left: 60px;
+    margin: 34px 0 0 -634px;
     position: relative;
-    right: 64%;
-    top: 152px;
-    width: 266px;
+    right: -624px;
+    top: 155px;
+    width: 100%;
 }
 .homepage-container .login-container .sb-facebook {
     background-attachment: inherit;
@@ -387,16 +436,16 @@ form {
     background-color: transparent;
     background-image: url("/img/hc-theme/fb-button.png");
     background-origin: padding-box;
-    background-position: 100% -13px;
+    background-position: 7.2% 12%;
     background-repeat: no-repeat;
-    background-size: auto auto;
+    background-size: 21% 139%;
     display: block;
-    height: 39px;
-    left: 60px;
+    height: 42px;
+    right: -624px;
+    margin: 34px 0 0 -634px;
     position: relative;
-    right: 85%;
-    top: 196px;
-    width: 266px;
+    top: 152px;
+    width: 100%;
 }
 footer {
     background: url("/img/hc-theme/footer-line.png") repeat-x scroll 0 0 / contain transparent;
@@ -775,19 +824,9 @@ body.ranking-page {
 	text-decoration: none;
 }
 #left-label {
-	float: right;
-    font-family: georgia;
+	font-family: georgia;
     font-size: 18px;
-    margin: auto;
-    text-align: center;
-    width: 100px;
-    color: white;
-}
-#left-time {
-	float: right;
-    font-family: georgia;
-    font-size: 45px;
-    margin: auto;
+    margin: 2px 10px 10px 145px;
     text-align: center;
     width: 100px;
     color: white;
@@ -811,4 +850,139 @@ body.ranking-page {
     text-align: left;
     top: 13%;
     width: 100px;
+    
+}
+#game_label {
+	color: white;
+	font-size: 20px;
+	width: 100px;
+}
+#game_left {
+	color: white;
+	font-size: 20px;
+	width: 100px;
+}
+.dash {
+	width: 65px;
+	color: white;
+	height: 70px;
+	float: left;
+}
+.dash_title {
+    float: left;
+    font-size: 20px;
+    height: 18px;
+    padding: 0 7px;
+    position: relative;
+    width: 49px;
+}
+.digit {
+	display: block;
+	width: 30px;
+	height:30px;
+	float: left;
+}
+.top {
+	font-family: georgia;
+    font-size: 20px;
+    font-weight: bold;
+    height: 25px;
+    text-align: center;
+    width: 30px;
+}
+.bottom {
+    font-family: georgia;
+    font-size: 20px;
+    font-weight: bold;
+    height: 25px;
+    padding: 0px 1px;
+    text-align: center;
+    width: 23px;
+}
+#countdown_dashboard {
+	width: 150px;
+	height: 70px;
+	float: left;
+}
+.colon_game {
+    float: left;
+    font-weight: bold;
+    height: 10px;
+    padding: -2px 10px;
+    width: 0;
+}
+#left-time {
+	margin: -23px 10px 10px 147px;
+    width: 150px;
+    height: 70px;
+}
+.chat-page .chat-container .rate_widget .ratings_chick {
+    background: url("/img/hc-theme/HatchChick-Hide.png") no-repeat scroll 0 -5px transparent;
+    float: right;
+    height: 110px;
+    margin: -177px -356px;
+    padding: 3px;
+    width: 110px;
+    background-size: 115px 115px;
+}
+.chat-page .chat-container .rate_widget .ratings_chick-sel	 {
+    background: url("/img/hc-theme/HatchChick-Show.png") no-repeat scroll 0 -5px transparent;
+    float: right;
+    height: 110px;
+    margin: -177px -356px;
+    padding: 3px;
+    width: 110px;
+    background-size: 115px 115px;
+}
+
+.chat-page .chat-container .rate_widget {  
+    border: 0px solid #CCCCCC;
+    float: left;
+    height: 6%;
+    left: 0;
+    margin: 5% 0 6% 2px;
+    overflow: visible;
+    padding: 1px;
+    position: relative;
+    width: 55%;
+}
+
+.chat-page .chat-container .rate_widget .ratings_vote {  
+    background: url('/img/hc-theme/HatchChick-Show.png') no-repeat scroll 0 -5px transparent;
+    background-size: 115px 115px;  
+}
+
+.chat-page .chat-container .rate_widget .ratings_over {
+    background: url('/img/hc-theme/HatchChick-Show.png') no-repeat scroll 0 -5px transparent;
+    background-size: 115px 115px;  
+}
+
+.messagewindow .imgleft {
+	border-radius: 8px 8px 8px 8px;
+    height: 49px;
+    left: 8px;
+    position: relative;
+    top: 3px;
+    width: 49px;
+}
+
+.messagewindow .imgright {
+    background-size: 0 11px;
+    border-radius: 8px 8px 8px 8px;
+    height: 49px;
+    left: 39px;
+    margin: -4px -14px 10px 452px;
+    position: relative;
+    top: 10px;
+    width: 9%;
+}
+
+#label {
+    color: white;
+    font-family: georgia;
+    font-size: 24px;
+    height: 31px;
+    margin: 99px 23px;
+    padding: 1px 2px;
+    width: 65px;
 }
